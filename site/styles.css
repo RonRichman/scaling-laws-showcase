@@ -217,9 +217,8 @@ summary:focus-visible,
   color: inherit;
 }
 .hero {
-  min-height: 740px;
-  height: calc(100svh - 88px);
-  max-height: 960px;
+  min-height: clamp(740px, calc(100svh - 88px), 960px);
+  height: auto;
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -1555,16 +1554,71 @@ tbody tr:last-child {
   color: #8b9f96;
 }
 .hero-sponsor {
-  margin-top: 18px;
-  color: #b5c8c4;
-  font-size: 11px;
-  line-height: 1.8;
+  display: grid;
+  grid-template-columns: minmax(155px, 1fr) minmax(0, 230px);
+  grid-template-areas: "label logo" "link logo";
+  column-gap: 4px;
+  row-gap: 9px;
+  width: min(100%, 460px);
+  margin-top: 24px;
+  padding: 6px 0 6px 22px;
+  border: 1px solid #4c655b;
+  background: #ffffff06;
+  color: #eef5ef;
+  text-decoration: none;
+  transition:
+    border-color 0.2s,
+    background-color 0.2s;
 }
-.hero-sponsor a {
+.hero-sponsor:hover,
+.hero-sponsor:focus-visible {
+  border-color: var(--mint);
+  background: #a6eacb0d;
+}
+.hero-sponsor-label {
+  grid-area: label;
+  align-self: end;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+.hero-sponsor-logo {
+  grid-area: logo;
+  align-self: center;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.hero-sponsor-link {
+  grid-area: link;
+  align-self: start;
+  font-size: 14px;
+  line-height: 1.5;
   color: var(--mint);
   text-decoration: underline;
   text-underline-offset: 4px;
   text-decoration-color: #6d9e8a;
+  white-space: nowrap;
+}
+.hero-sponsor-link > span {
+  display: inline-block;
+  margin-left: 8px;
+}
+@media (max-width: 500px) {
+  .hero-sponsor {
+    grid-template-columns: 1fr;
+    grid-template-areas: "label" "logo" "link";
+    justify-items: center;
+    row-gap: 0;
+    padding: 20px 12px;
+    text-align: center;
+  }
+  .hero-sponsor-logo {
+    width: min(100%, 260px);
+  }
+  .hero-sponsor-label {
+    font-size: 17px;
+  }
 }
 .research-acknowledgements {
   display: grid;
@@ -1789,7 +1843,8 @@ tbody tr:last-child {
     min-height: 660px;
     padding-top: 46px;
     padding-bottom: 100px;
-    grid-template-columns: 1fr 0.8fr;
+    grid-template-columns: 1fr;
+    row-gap: 32px;
   }
   .hero h1 {
     font-size: clamp(60px, 9vw, 80px);
@@ -1798,8 +1853,8 @@ tbody tr:last-child {
     max-width: 310px;
   }
   .hero-art {
-    width: 142%;
-    margin-left: -30%;
+    width: 100%;
+    margin-left: 0;
   }
   .hero-art canvas {
     height: 340px;
@@ -3010,7 +3065,6 @@ tbody tr:last-child {
     color: black;
   }
   .dark p,
-  .dark .hero-sponsor a,
   .dark .acknowledgements-copy strong,
   .dark .section-marker span {
     color: #333;
@@ -3041,6 +3095,12 @@ tbody tr:last-child {
   .hero-byline,
   .hero-description {
     color: #333;
+  }
+  .dark .hero-sponsor,
+  .dark .hero-sponsor-link {
+    background: #11202c;
+    color: #eef5ef;
+    print-color-adjust: exact;
   }
   .law-copy h2 em,
   .research-heading h2 em {
