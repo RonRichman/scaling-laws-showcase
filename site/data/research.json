@@ -1,0 +1,2956 @@
+{
+  "schemaVersion": 1,
+  "fractions": [
+    0.05,
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "trainingRows": [
+    201985,
+    404283,
+    1010056,
+    2018631,
+    3026912,
+    4034782
+  ],
+  "families": [
+    {
+      "id": "glm",
+      "name": "Generalized linear model",
+      "shortName": "GLM",
+      "color": "#8e9bb0",
+      "description": "The additive actuarial benchmark: learned contributions from rating factors combine on a log scale.",
+      "values": [
+        0.29343383,
+        0.292840879,
+        0.29236294,
+        0.292124729,
+        0.292035595,
+        0.291996624
+      ],
+      "tableValues": [
+        0.29343,
+        0.29284,
+        0.29236,
+        0.29212,
+        0.29204,
+        0.292
+      ],
+      "bestAchievedValues": [
+        0.29343383,
+        0.292840879,
+        0.29236294,
+        0.292124729,
+        0.292035595,
+        0.291996624
+      ],
+      "selectedConfigurations": [
+        "glm",
+        "glm",
+        "glm",
+        "glm",
+        "glm",
+        "glm"
+      ],
+      "mainSweepConfigurationCount": 1
+    },
+    {
+      "id": "ffn",
+      "name": "Feed-forward network",
+      "shortName": "FFN",
+      "color": "#ebad74",
+      "description": "Dense neural layers learn nonlinear combinations of the same embedded rating factors.",
+      "values": [
+        0.294241353,
+        0.292665232,
+        0.291664313,
+        0.291181574,
+        0.290859278,
+        0.290583286
+      ],
+      "tableValues": [
+        0.29424,
+        0.29267,
+        0.29166,
+        0.29118,
+        0.29086,
+        0.29058
+      ],
+      "bestAchievedValues": [
+        0.294241353,
+        0.292665232,
+        0.291664313,
+        0.291181574,
+        0.290859278,
+        0.290583286
+      ],
+      "selectedConfigurations": [
+        "ffn_very_small",
+        "ffn_very_small",
+        "ffn_medium",
+        "ffn_very_large",
+        "ffn_very_large",
+        "ffn_very_large"
+      ],
+      "mainSweepConfigurationCount": 5
+    },
+    {
+      "id": "transformer",
+      "name": "Vanilla Transformer",
+      "shortName": "Transformer",
+      "color": "#8b9bf4",
+      "description": "Attention lets each rating-factor token compare its information with the other fields.",
+      "values": [
+        0.293396745,
+        0.292742464,
+        0.291663,
+        0.2912212,
+        0.290998126,
+        0.290845812
+      ],
+      "tableValues": [
+        0.2934,
+        0.29274,
+        0.29166,
+        0.29122,
+        0.291,
+        0.29085
+      ],
+      "bestAchievedValues": [
+        0.293396745,
+        0.292742464,
+        0.291663,
+        0.2912212,
+        0.290998126,
+        0.290845812
+      ],
+      "selectedConfigurations": [
+        "transformer_large",
+        "transformer_small",
+        "transformer_medium",
+        "transformer_medium",
+        "transformer_medium",
+        "transformer_medium"
+      ],
+      "mainSweepConfigurationCount": 4
+    },
+    {
+      "id": "multicls",
+      "name": "MultiCLS Transformer",
+      "shortName": "MultiCLS",
+      "color": "#bd97ec",
+      "description": "Several learned summary tokens collect different views of the row before prediction.",
+      "values": [
+        0.293211324,
+        0.292324009,
+        0.291675642,
+        0.291203554,
+        0.290892129,
+        0.290779673
+      ],
+      "tableValues": [
+        0.29321,
+        0.29232,
+        0.29168,
+        0.2912,
+        0.29089,
+        0.29078
+      ],
+      "bestAchievedValues": [
+        0.293211324,
+        0.292324009,
+        0.291675642,
+        0.291203554,
+        0.290892129,
+        0.290779673
+      ],
+      "selectedConfigurations": [
+        "transformer_multicls_medium",
+        "transformer_multicls_large",
+        "transformer_multicls_medium",
+        "transformer_multicls_medium",
+        "transformer_multicls_large",
+        "transformer_multicls_medium"
+      ],
+      "mainSweepConfigurationCount": 4
+    },
+    {
+      "id": "hybrid",
+      "name": "Transformer + TabM-mini",
+      "shortName": "Transformer + TabM",
+      "color": "#61d2df",
+      "description": "An attention front end learns interactions; a compact TabM-mini ensemble head turns them into a prediction.",
+      "values": [
+        0.292824917,
+        0.292167767,
+        0.291471443,
+        0.291078628,
+        0.290687997,
+        0.290561046
+      ],
+      "tableValues": [
+        0.29282,
+        0.29217,
+        0.29147,
+        0.29108,
+        0.29069,
+        0.29056
+      ],
+      "bestAchievedValues": [
+        0.292824917,
+        0.292167767,
+        0.291471443,
+        0.291078628,
+        0.290687997,
+        0.290561046
+      ],
+      "selectedConfigurations": [
+        "transformer_multicls_tabm_mini_medium",
+        "transformer_multicls_tabm_mini_medium",
+        "transformer_multicls_tabm_mini_medium",
+        "transformer_multicls_tabm_mini_large",
+        "transformer_multicls_tabm_mini_medium",
+        "transformer_multicls_tabm_mini_medium"
+      ],
+      "mainSweepConfigurationCount": 4
+    },
+    {
+      "id": "moe",
+      "name": "TokenMoE Transformer",
+      "shortName": "TokenMoE",
+      "color": "#e78fac",
+      "description": "Before attention, a token-level router mixes expert-specific embedding increments into the base and layer-wise value streams.",
+      "values": [
+        0.29350289,
+        0.29263432,
+        0.291857649,
+        0.291263648,
+        0.290967443,
+        0.290738308
+      ],
+      "tableValues": [
+        0.2935,
+        0.29263,
+        0.29186,
+        0.29126,
+        0.29097,
+        0.29074
+      ],
+      "bestAchievedValues": [
+        0.29350289,
+        0.29263432,
+        0.291857649,
+        0.291263648,
+        0.290967443,
+        0.290738308
+      ],
+      "selectedConfigurations": [
+        "transformer_tokenmoe_large",
+        "transformer_tokenmoe_large",
+        "transformer_tokenmoe_large",
+        "transformer_tokenmoe_large",
+        "transformer_tokenmoe_large",
+        "transformer_tokenmoe_large"
+      ],
+      "mainSweepConfigurationCount": 4
+    },
+    {
+      "id": "ssl",
+      "name": "TokenMoE + self-supervision",
+      "shortName": "TokenMoE + SSL",
+      "color": "#e3cd72",
+      "description": "A swap-detection auxiliary objective adds a learning signal alongside claim-frequency prediction.",
+      "values": [
+        0.293320811,
+        0.292630709,
+        0.291861991,
+        0.291291058,
+        0.290868456,
+        0.290361126
+      ],
+      "tableValues": [
+        0.29332,
+        0.29263,
+        0.29186,
+        0.29129,
+        0.29087,
+        0.29036
+      ],
+      "bestAchievedValues": [
+        0.293320811,
+        0.292630709,
+        0.291861991,
+        0.291291058,
+        0.290868456,
+        0.290273059
+      ],
+      "selectedConfigurations": [
+        "transformer_tokenmoe_ssl_large",
+        "transformer_tokenmoe_ssl_medium",
+        "transformer_tokenmoe_ssl_medium",
+        "transformer_tokenmoe_ssl_medium",
+        "transformer_tokenmoe_ssl_medium",
+        "transformer_tokenmoe_ssl_large"
+      ],
+      "mainSweepConfigurationCount": 4
+    },
+    {
+      "id": "tabm",
+      "name": "TabM / TabM-mini",
+      "shortName": "TabM / TabM-mini",
+      "color": "#b5ec79",
+      "description": "Many lightweight ensemble members share a dense backbone, with small member-specific adapters.",
+      "values": [
+        0.293796158,
+        0.292516491,
+        0.29163051,
+        0.291036934,
+        0.290206804,
+        0.289835955
+      ],
+      "tableValues": [
+        0.2938,
+        0.29252,
+        0.29163,
+        0.29104,
+        0.29021,
+        0.28984
+      ],
+      "bestAchievedValues": [
+        0.293796158,
+        0.292516491,
+        0.29163051,
+        0.291036934,
+        0.290206804,
+        0.288854567
+      ],
+      "selectedConfigurations": [
+        "tabm_mini_small",
+        "tabm_small",
+        "tabm_small",
+        "tabm_large",
+        "tabm_xlarge",
+        "tabm_xlarge"
+      ],
+      "mainSweepConfigurationCount": 8
+    }
+  ],
+  "extensions": [
+    {
+      "familyId": "ssl",
+      "name": "TokenMoE + SSL (xlarge)",
+      "configuration": "transformer_tokenmoessl_xlarge",
+      "fraction": 1,
+      "trainingRows": 4034782,
+      "value": 0.290273059,
+      "tableValue": 0.29027,
+      "values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        0.290273059
+      ],
+      "fullDataOnly": true,
+      "sourceTableLabel": "tab:size_scaling_transformer_fixes",
+      "parameterCount": 4082380,
+      "flopsPerEpochOneSeed": 1263763747995648,
+      "totalParameterCount": 4082380,
+      "nonTrainableParameterCount": 0,
+      "embeddingParameterCount": 3013250,
+      "backboneParameterCount": 1069130,
+      "profileConfiguration": "transformer_tokenmoessl_xlarge"
+    },
+    {
+      "familyId": "tabm",
+      "name": "TabM-mini (xlarge-2)",
+      "configuration": "tabm_mini_xlarge_2",
+      "fraction": 1,
+      "trainingRows": 4034782,
+      "value": 0.289032431,
+      "tableValue": 0.28903,
+      "values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        0.289032431
+      ],
+      "fullDataOnly": true,
+      "sourceTableLabel": "tab:size_scaling_tabm",
+      "parameterCount": 8246272,
+      "flopsPerEpochOneSeed": 5929021915660800,
+      "totalParameterCount": 8246272,
+      "nonTrainableParameterCount": 0,
+      "embeddingParameterCount": 132096,
+      "backboneParameterCount": 8114176,
+      "profileConfiguration": "tabm_mini_xlarge_2",
+      "sameArchitectureAs": "tabm_mini_xlarge",
+      "capacityNote": "Same architecture and parameter count as the main-sweep TabM-mini xlarge, evaluated through a separate workflow; its improvement is not attributable to additional parameters."
+    },
+    {
+      "familyId": "tabm",
+      "name": "TabM-mini (gigantic)",
+      "configuration": "tabm_mini_xlarge3",
+      "fraction": 1,
+      "trainingRows": 4034782,
+      "value": 0.288854567,
+      "tableValue": 0.28885,
+      "values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        0.288854567
+      ],
+      "fullDataOnly": true,
+      "sourceTableLabel": "tab:size_scaling_tabm",
+      "parameterCount": 31783936,
+      "flopsPerEpochOneSeed": 23705605598740992,
+      "totalParameterCount": 31783936,
+      "nonTrainableParameterCount": 0,
+      "embeddingParameterCount": 264192,
+      "backboneParameterCount": 31519744,
+      "profileConfiguration": "tabm_mini_xlarge3"
+    }
+  ],
+  "sizeLadders": {
+    "ffn": [
+      {
+        "configuration": "ffn_very_small",
+        "name": "FFN (very small)",
+        "values": [
+          0.294241353,
+          0.292665232,
+          0.291854838,
+          0.291385045,
+          0.291087283,
+          0.290977202
+        ],
+        "tableValues": [
+          0.29424,
+          0.29267,
+          0.29185,
+          0.29139,
+          0.29109,
+          0.29098
+        ],
+        "sourceTableLabel": "tab:size_scaling_baselines",
+        "parameterCounts": [
+          7205,
+          7205,
+          7205,
+          7205,
+          7205,
+          7205
+        ],
+        "totalParameterCounts": [
+          7237,
+          7237,
+          7237,
+          7237,
+          7237,
+          7237
+        ],
+        "nonTrainableParameterCounts": [
+          32,
+          32,
+          32,
+          32,
+          32,
+          32
+        ],
+        "flopsPerEpochOneSeed": [
+          5782732800,
+          11449810944,
+          28566700032,
+          57017745408,
+          85468790784,
+          114035490816
+        ],
+        "embeddingParameterCounts": [
+          2580,
+          2580,
+          2580,
+          2580,
+          2580,
+          2580
+        ],
+        "backboneParameterCounts": [
+          4625,
+          4625,
+          4625,
+          4625,
+          4625,
+          4625
+        ],
+        "profileConfiguration": "ffn_very_small"
+      },
+      {
+        "configuration": "ffn_small",
+        "name": "FFN (small)",
+        "values": [
+          0.297901904,
+          0.293040597,
+          0.291868616,
+          0.2913214,
+          0.291013952,
+          0.290868326
+        ],
+        "tableValues": [
+          0.2979,
+          0.29304,
+          0.29187,
+          0.29132,
+          0.29101,
+          0.29087
+        ],
+        "sourceTableLabel": "tab:size_scaling_baselines",
+        "parameterCounts": [
+          24073,
+          24073,
+          24073,
+          24073,
+          24073,
+          24073
+        ],
+        "totalParameterCounts": [
+          24169,
+          24169,
+          24169,
+          24169,
+          24169,
+          24169
+        ],
+        "nonTrainableParameterCounts": [
+          96,
+          96,
+          96,
+          96,
+          96,
+          96
+        ],
+        "flopsPerEpochOneSeed": [
+          23398809600,
+          46329643008,
+          115590119424,
+          230712262656,
+          345834405888,
+          461424525312
+        ],
+        "embeddingParameterCounts": [
+          5160,
+          5160,
+          5160,
+          5160,
+          5160,
+          5160
+        ],
+        "backboneParameterCounts": [
+          18913,
+          18913,
+          18913,
+          18913,
+          18913,
+          18913
+        ],
+        "profileConfiguration": "ffn_small"
+      },
+      {
+        "configuration": "ffn_medium",
+        "name": "FFN (medium)",
+        "values": [
+          0.300546137,
+          0.294025906,
+          0.291664313,
+          0.291259184,
+          0.290957564,
+          0.290698748
+        ],
+        "tableValues": [
+          0.30055,
+          0.29403,
+          0.29166,
+          0.29126,
+          0.29096,
+          0.2907
+        ],
+        "sourceTableLabel": "tab:size_scaling_baselines",
+        "parameterCounts": [
+          64829,
+          64829,
+          64829,
+          64829,
+          64829,
+          64829
+        ],
+        "totalParameterCounts": [
+          65021,
+          65021,
+          65021,
+          65021,
+          65021,
+          65021
+        ],
+        "nonTrainableParameterCounts": [
+          192,
+          192,
+          192,
+          192,
+          192,
+          192
+        ],
+        "flopsPerEpochOneSeed": [
+          70397952000,
+          139387944960,
+          347765882880,
+          694123806720,
+          1040481730560,
+          1388247613440
+        ],
+        "embeddingParameterCounts": [
+          7740,
+          7740,
+          7740,
+          7740,
+          7740,
+          7740
+        ],
+        "backboneParameterCounts": [
+          57089,
+          57089,
+          57089,
+          57089,
+          57089,
+          57089
+        ],
+        "profileConfiguration": "ffn_medium"
+      },
+      {
+        "configuration": "ffn_large",
+        "name": "FFN (large)",
+        "values": [
+          0.298650788,
+          0.294375952,
+          0.291851359,
+          0.291337465,
+          0.290893429,
+          0.290628058
+        ],
+        "tableValues": [
+          0.29865,
+          0.29438,
+          0.29185,
+          0.29134,
+          0.29089,
+          0.29063
+        ],
+        "sourceTableLabel": "tab:size_scaling_baselines",
+        "parameterCounts": [
+          167185,
+          167185,
+          167185,
+          167185,
+          167185,
+          167185
+        ],
+        "totalParameterCounts": [
+          167633,
+          167633,
+          167633,
+          167633,
+          167633,
+          167633
+        ],
+        "nonTrainableParameterCounts": [
+          448,
+          448,
+          448,
+          448,
+          448,
+          448
+        ],
+        "flopsPerEpochOneSeed": [
+          193238630400,
+          382612488192,
+          954598834176,
+          1905332895744,
+          2856066957312,
+          3810665791488
+        ],
+        "embeddingParameterCounts": [
+          10320,
+          10320,
+          10320,
+          10320,
+          10320,
+          10320
+        ],
+        "backboneParameterCounts": [
+          156865,
+          156865,
+          156865,
+          156865,
+          156865,
+          156865
+        ],
+        "profileConfiguration": "ffn_large"
+      },
+      {
+        "configuration": "ffn_very_large",
+        "name": "FFN (very large)",
+        "values": [
+          0.301789063,
+          0.294495693,
+          0.29198967,
+          0.291181574,
+          0.290859278,
+          0.290583286
+        ],
+        "tableValues": [
+          0.30179,
+          0.2945,
+          0.29199,
+          0.29118,
+          0.29086,
+          0.29058
+        ],
+        "sourceTableLabel": "tab:size_scaling_baselines",
+        "parameterCounts": [
+          646689,
+          646689,
+          646689,
+          646689,
+          646689,
+          646689
+        ],
+        "totalParameterCounts": [
+          647585,
+          647585,
+          647585,
+          647585,
+          647585,
+          647585
+        ],
+        "nonTrainableParameterCounts": [
+          896,
+          896,
+          896,
+          896,
+          896,
+          896
+        ],
+        "flopsPerEpochOneSeed": [
+          770184806400,
+          1524965916672,
+          3804712943616,
+          7594022191104,
+          11383331438592,
+          15188044382208
+        ],
+        "embeddingParameterCounts": [
+          20640,
+          20640,
+          20640,
+          20640,
+          20640,
+          20640
+        ],
+        "backboneParameterCounts": [
+          626049,
+          626049,
+          626049,
+          626049,
+          626049,
+          626049
+        ],
+        "profileConfiguration": "ffn_very_large"
+      }
+    ],
+    "transformer": [
+      {
+        "configuration": "transformer_tiny",
+        "name": "Transformer (tiny)",
+        "values": [
+          0.297121273,
+          0.294630601,
+          0.292027,
+          0.291754312,
+          0.292588103,
+          0.29104044
+        ],
+        "tableValues": [
+          0.29712,
+          0.29463,
+          0.29203,
+          0.29175,
+          0.29259,
+          0.29104
+        ],
+        "sourceTableLabel": "tab:size_scaling_baselines",
+        "parameterCounts": [
+          17638,
+          17638,
+          17638,
+          17638,
+          17638,
+          17638
+        ],
+        "totalParameterCounts": [
+          17798,
+          17798,
+          17798,
+          17798,
+          17798,
+          17798
+        ],
+        "nonTrainableParameterCounts": [
+          160,
+          160,
+          160,
+          160,
+          160,
+          160
+        ],
+        "flopsPerEpochOneSeed": [
+          876965856000,
+          1753931712000,
+          4317370368000,
+          8567281824000,
+          12817193280000,
+          17067104736000
+        ],
+        "embeddingParameterCounts": [
+          9200,
+          9200,
+          9200,
+          9200,
+          9200,
+          9200
+        ],
+        "backboneParameterCounts": [
+          8438,
+          8438,
+          8438,
+          8438,
+          8438,
+          8438
+        ],
+        "profileConfiguration": "transformer_tiny"
+      },
+      {
+        "configuration": "transformer_small",
+        "name": "Transformer (small)",
+        "values": [
+          0.294307491,
+          0.292742464,
+          0.291958,
+          0.291475832,
+          0.291098095,
+          0.290901418
+        ],
+        "tableValues": [
+          0.29431,
+          0.29274,
+          0.29196,
+          0.29148,
+          0.2911,
+          0.2909
+        ],
+        "sourceTableLabel": "tab:size_scaling_baselines",
+        "parameterCounts": [
+          48722,
+          48722,
+          48722,
+          48722,
+          48722,
+          48722
+        ],
+        "totalParameterCounts": [
+          48946,
+          48946,
+          48946,
+          48946,
+          48946,
+          48946
+        ],
+        "nonTrainableParameterCounts": [
+          224,
+          224,
+          224,
+          224,
+          224,
+          224
+        ],
+        "flopsPerEpochOneSeed": [
+          3416139168000,
+          6832278336000,
+          16817915904000,
+          33373051872000,
+          49928187840000,
+          66483323808000
+        ],
+        "embeddingParameterCounts": [
+          13800,
+          13800,
+          13800,
+          13800,
+          13800,
+          13800
+        ],
+        "backboneParameterCounts": [
+          34922,
+          34922,
+          34922,
+          34922,
+          34922,
+          34922
+        ],
+        "profileConfiguration": "transformer_small"
+      },
+      {
+        "configuration": "transformer_medium",
+        "name": "Transformer (medium)",
+        "values": [
+          0.293584822,
+          0.293027899,
+          0.291663,
+          0.2912212,
+          0.290998126,
+          0.290845812
+        ],
+        "tableValues": [
+          0.29358,
+          0.29303,
+          0.29166,
+          0.29122,
+          0.291,
+          0.29085
+        ],
+        "sourceTableLabel": "tab:size_scaling_baselines",
+        "parameterCounts": [
+          162842,
+          162842,
+          162842,
+          162842,
+          162842,
+          162842
+        ],
+        "totalParameterCounts": [
+          163194,
+          163194,
+          163194,
+          163194,
+          163194,
+          163194
+        ],
+        "nonTrainableParameterCounts": [
+          352,
+          352,
+          352,
+          352,
+          352,
+          352
+        ],
+        "flopsPerEpochOneSeed": [
+          12365871648000,
+          24731743296000,
+          60878137344000,
+          120805053792000,
+          180731970240000,
+          240658886688000
+        ],
+        "embeddingParameterCounts": [
+          23000,
+          23000,
+          23000,
+          23000,
+          23000,
+          23000
+        ],
+        "backboneParameterCounts": [
+          139842,
+          139842,
+          139842,
+          139842,
+          139842,
+          139842
+        ],
+        "profileConfiguration": "transformer_medium"
+      },
+      {
+        "configuration": "transformer_large",
+        "name": "Transformer (large)",
+        "values": [
+          0.293396745,
+          0.293152666,
+          0.291848,
+          0.291295664,
+          0.291001082,
+          0.290939
+        ],
+        "tableValues": [
+          0.2934,
+          0.29315,
+          0.29185,
+          0.2913,
+          0.291,
+          0.29094
+        ],
+        "sourceTableLabel": "tab:size_scaling_baselines",
+        "parameterCounts": [
+          506362,
+          506362,
+          506362,
+          506362,
+          506362,
+          506362
+        ],
+        "totalParameterCounts": [
+          506906,
+          506906,
+          506906,
+          506906,
+          506906,
+          506906
+        ],
+        "nonTrainableParameterCounts": [
+          544,
+          544,
+          544,
+          544,
+          544,
+          544
+        ],
+        "flopsPerEpochOneSeed": [
+          38872358304000,
+          77744716608000,
+          191371610112000,
+          379753038816000,
+          568134467520000,
+          756515896224000
+        ],
+        "embeddingParameterCounts": [
+          36800,
+          36800,
+          36800,
+          36800,
+          36800,
+          36800
+        ],
+        "backboneParameterCounts": [
+          469562,
+          469562,
+          469562,
+          469562,
+          469562,
+          469562
+        ],
+        "profileConfiguration": "transformer_large"
+      }
+    ],
+    "multicls": [
+      {
+        "configuration": "transformer_multicls_tiny",
+        "name": "MultiCLS (tiny)",
+        "values": [
+          0.293789042,
+          0.292627486,
+          0.291884536,
+          0.291481783,
+          0.291183875,
+          0.291059632
+        ],
+        "tableValues": [
+          0.29379,
+          0.29263,
+          0.29188,
+          0.29148,
+          0.29118,
+          0.29106
+        ],
+        "sourceTableLabel": "tab:size_scaling_transformer_fixes",
+        "parameterCounts": [
+          18311,
+          18311,
+          18311,
+          18311,
+          18311,
+          18311
+        ],
+        "totalParameterCounts": [
+          18535,
+          18535,
+          18535,
+          18535,
+          18535,
+          18535
+        ],
+        "nonTrainableParameterCounts": [
+          224,
+          224,
+          224,
+          224,
+          224,
+          224
+        ],
+        "flopsPerEpochOneSeed": [
+          884360601600,
+          1751033991168,
+          4368741371904,
+          8719795531776,
+          13070849691648,
+          17439591063552
+        ],
+        "embeddingParameterCounts": [
+          9232,
+          9232,
+          9232,
+          9232,
+          9232,
+          9232
+        ],
+        "backboneParameterCounts": [
+          9079,
+          9079,
+          9079,
+          9079,
+          9079,
+          9079
+        ],
+        "profileConfiguration": "transformer_multicls_tiny"
+      },
+      {
+        "configuration": "transformer_multicls_small",
+        "name": "MultiCLS (small)",
+        "values": [
+          0.293390279,
+          0.292344574,
+          0.291739729,
+          0.291358871,
+          0.291000568,
+          0.290999058
+        ],
+        "tableValues": [
+          0.29339,
+          0.29234,
+          0.29174,
+          0.29136,
+          0.291,
+          0.291
+        ],
+        "sourceTableLabel": "tab:size_scaling_transformer_fixes",
+        "parameterCounts": [
+          51566,
+          51566,
+          51566,
+          51566,
+          51566,
+          51566
+        ],
+        "totalParameterCounts": [
+          52078,
+          52078,
+          52078,
+          52078,
+          52078,
+          52078
+        ],
+        "nonTrainableParameterCounts": [
+          512,
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        "flopsPerEpochOneSeed": [
+          3588323328000,
+          7104880189440,
+          17726317240320,
+          35380868014080,
+          53035418787840,
+          70761736028160
+        ],
+        "embeddingParameterCounts": [
+          13944,
+          13944,
+          13944,
+          13944,
+          13944,
+          13944
+        ],
+        "backboneParameterCounts": [
+          37622,
+          37622,
+          37622,
+          37622,
+          37622,
+          37622
+        ],
+        "profileConfiguration": "transformer_multicls_small"
+      },
+      {
+        "configuration": "transformer_multicls_medium",
+        "name": "MultiCLS (medium)",
+        "values": [
+          0.293211324,
+          0.29259017,
+          0.291675642,
+          0.291203554,
+          0.291063582,
+          0.290779673
+        ],
+        "tableValues": [
+          0.29321,
+          0.29259,
+          0.29168,
+          0.2912,
+          0.29106,
+          0.29078
+        ],
+        "sourceTableLabel": "tab:size_scaling_transformer_fixes",
+        "parameterCounts": [
+          170632,
+          170632,
+          170632,
+          170632,
+          170632,
+          170632
+        ],
+        "totalParameterCounts": [
+          171784,
+          171784,
+          171784,
+          171784,
+          171784,
+          171784
+        ],
+        "nonTrainableParameterCounts": [
+          1152,
+          1152,
+          1152,
+          1152,
+          1152,
+          1152
+        ],
+        "flopsPerEpochOneSeed": [
+          13431211622400,
+          26593799012352,
+          66350185414656,
+          132431746596864,
+          198513307779072,
+          264863493193728
+        ],
+        "embeddingParameterCounts": [
+          23400,
+          23400,
+          23400,
+          23400,
+          23400,
+          23400
+        ],
+        "backboneParameterCounts": [
+          147232,
+          147232,
+          147232,
+          147232,
+          147232,
+          147232
+        ],
+        "profileConfiguration": "transformer_multicls_medium"
+      },
+      {
+        "configuration": "transformer_multicls_large",
+        "name": "MultiCLS (large)",
+        "values": [
+          0.293222484,
+          0.292324009,
+          0.291792115,
+          0.291311569,
+          0.290892129,
+          0.291096063
+        ],
+        "tableValues": [
+          0.29322,
+          0.29232,
+          0.29179,
+          0.29131,
+          0.29089,
+          0.2911
+        ],
+        "sourceTableLabel": "tab:size_scaling_transformer_fixes",
+        "parameterCounts": [
+          523754,
+          523754,
+          523754,
+          523754,
+          523754,
+          523754
+        ],
+        "totalParameterCounts": [
+          526090,
+          526090,
+          526090,
+          526090,
+          526090,
+          526090
+        ],
+        "nonTrainableParameterCounts": [
+          2336,
+          2336,
+          2336,
+          2336,
+          2336,
+          2336
+        ],
+        "flopsPerEpochOneSeed": [
+          43524158668800,
+          86177834164224,
+          215009343823872,
+          429148204474368,
+          643287065124864,
+          858296408948736
+        ],
+        "embeddingParameterCounts": [
+          37696,
+          37696,
+          37696,
+          37696,
+          37696,
+          37696
+        ],
+        "backboneParameterCounts": [
+          486058,
+          486058,
+          486058,
+          486058,
+          486058,
+          486058
+        ],
+        "profileConfiguration": "transformer_multicls_large"
+      }
+    ],
+    "hybrid": [
+      {
+        "configuration": "transformer_multicls_tabm_mini_tiny",
+        "name": "Transformer+TabM (tiny)",
+        "values": [
+          0.293213559,
+          0.292496861,
+          0.291855332,
+          0.291289032,
+          0.290992928,
+          0.290870606
+        ],
+        "tableValues": [
+          0.29321,
+          0.2925,
+          0.29186,
+          0.29129,
+          0.29099,
+          0.29087
+        ],
+        "sourceTableLabel": "tab:size_scaling_transformer_fixes",
+        "parameterCounts": [
+          33598,
+          33598,
+          33598,
+          33598,
+          33598,
+          33598
+        ],
+        "totalParameterCounts": [
+          33822,
+          33822,
+          33822,
+          33822,
+          33822,
+          33822
+        ],
+        "nonTrainableParameterCounts": [
+          224,
+          224,
+          224,
+          224,
+          224,
+          224
+        ],
+        "flopsPerEpochOneSeed": [
+          7066642636800,
+          13991952420864,
+          34909214625792,
+          69677096398848,
+          104444978171904,
+          139354192797696
+        ],
+        "embeddingParameterCounts": [
+          9232,
+          9232,
+          9232,
+          9232,
+          9232,
+          9232
+        ],
+        "backboneParameterCounts": [
+          24366,
+          24366,
+          24366,
+          24366,
+          24366,
+          24366
+        ],
+        "profileConfiguration": "transformer_multicls_tabm_mini_tiny"
+      },
+      {
+        "configuration": "transformer_multicls_tabm_mini_small",
+        "name": "Transformer+TabM (small)",
+        "values": [
+          0.292876276,
+          0.292232806,
+          0.291663242,
+          0.291122421,
+          0.290850744,
+          0.290692516
+        ],
+        "tableValues": [
+          0.29288,
+          0.29223,
+          0.29166,
+          0.29112,
+          0.29085,
+          0.29069
+        ],
+        "sourceTableLabel": "tab:size_scaling_transformer_fixes",
+        "parameterCounts": [
+          98765,
+          98765,
+          98765,
+          98765,
+          98765,
+          98765
+        ],
+        "totalParameterCounts": [
+          99277,
+          99277,
+          99277,
+          99277,
+          99277,
+          99277
+        ],
+        "nonTrainableParameterCounts": [
+          512,
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        "flopsPerEpochOneSeed": [
+          57362552217600,
+          113577853390848,
+          283371007954944,
+          565594764865536,
+          847818521776128,
+          1131189529731072
+        ],
+        "embeddingParameterCounts": [
+          13944,
+          13944,
+          13944,
+          13944,
+          13944,
+          13944
+        ],
+        "backboneParameterCounts": [
+          84821,
+          84821,
+          84821,
+          84821,
+          84821,
+          84821
+        ],
+        "profileConfiguration": "transformer_multicls_tabm_mini_small"
+      },
+      {
+        "configuration": "transformer_multicls_tabm_mini_medium",
+        "name": "Transformer+TabM (medium)",
+        "values": [
+          0.292824917,
+          0.292167767,
+          0.291471443,
+          0.291239374,
+          0.290687997,
+          0.290561046
+        ],
+        "tableValues": [
+          0.29282,
+          0.29217,
+          0.29147,
+          0.29124,
+          0.29069,
+          0.29056
+        ],
+        "sourceTableLabel": "tab:size_scaling_transformer_fixes",
+        "parameterCounts": [
+          292143,
+          292143,
+          292143,
+          292143,
+          292143,
+          292143
+        ],
+        "totalParameterCounts": [
+          293295,
+          293295,
+          293295,
+          293295,
+          293295,
+          293295
+        ],
+        "nonTrainableParameterCounts": [
+          1152,
+          1152,
+          1152,
+          1152,
+          1152,
+          1152
+        ],
+        "flopsPerEpochOneSeed": [
+          322192024166400,
+          637940207849472,
+          1591628599382016,
+          3176813358280704,
+          4761998117179392,
+          6353626716561408
+        ],
+        "embeddingParameterCounts": [
+          23400,
+          23400,
+          23400,
+          23400,
+          23400,
+          23400
+        ],
+        "backboneParameterCounts": [
+          268743,
+          268743,
+          268743,
+          268743,
+          268743,
+          268743
+        ],
+        "profileConfiguration": "transformer_multicls_tabm_mini_medium"
+      },
+      {
+        "configuration": "transformer_multicls_tabm_mini_large",
+        "name": "Transformer+TabM (large)",
+        "values": [
+          0.292875121,
+          0.29218506,
+          0.291603922,
+          0.291078628,
+          0.290798572,
+          0.290591052
+        ],
+        "tableValues": [
+          0.29288,
+          0.29219,
+          0.2916,
+          0.29108,
+          0.2908,
+          0.29059
+        ],
+        "sourceTableLabel": "tab:size_scaling_transformer_fixes",
+        "parameterCounts": [
+          790777,
+          790777,
+          790777,
+          790777,
+          790777,
+          790777
+        ],
+        "totalParameterCounts": [
+          793113,
+          793113,
+          793113,
+          793113,
+          793113,
+          793113
+        ],
+        "nonTrainableParameterCounts": [
+          2336,
+          2336,
+          2336,
+          2336,
+          2336,
+          2336
+        ],
+        "flopsPerEpochOneSeed": [
+          1392388498022400,
+          2756929226084352,
+          6878399180230656,
+          13728950590500864,
+          20579502000771072,
+          27457901181001728
+        ],
+        "embeddingParameterCounts": [
+          37696,
+          37696,
+          37696,
+          37696,
+          37696,
+          37696
+        ],
+        "backboneParameterCounts": [
+          753081,
+          753081,
+          753081,
+          753081,
+          753081,
+          753081
+        ],
+        "profileConfiguration": "transformer_multicls_tabm_mini_large"
+      }
+    ],
+    "moe": [
+      {
+        "configuration": "transformer_tokenmoe_tiny",
+        "name": "TokenMoE (tiny)",
+        "values": [
+          0.293622002,
+          0.292793553,
+          0.292130259,
+          0.291721718,
+          0.29145594,
+          0.290820305
+        ],
+        "tableValues": [
+          0.29362,
+          0.29279,
+          0.29213,
+          0.29172,
+          0.29146,
+          0.29082
+        ],
+        "sourceTableLabel": "tab:size_scaling_transformer_fixes",
+        "parameterCounts": [
+          57676,
+          57676,
+          57676,
+          57676,
+          57676,
+          57676
+        ],
+        "totalParameterCounts": [
+          57676,
+          57676,
+          57676,
+          57676,
+          57676,
+          57676
+        ],
+        "nonTrainableParameterCounts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "flopsPerEpochOneSeed": [
+          237371596800,
+          469995761664,
+          1172615688192,
+          2340483944448,
+          3508352200704,
+          4680967888896
+        ],
+        "embeddingParameterCounts": [
+          52192,
+          52192,
+          52192,
+          52192,
+          52192,
+          52192
+        ],
+        "backboneParameterCounts": [
+          5484,
+          5484,
+          5484,
+          5484,
+          5484,
+          5484
+        ],
+        "profileConfiguration": "transformer_tokenmoe_tiny"
+      },
+      {
+        "configuration": "transformer_tokenmoe_small",
+        "name": "TokenMoE (small)",
+        "values": [
+          0.293808733,
+          0.292693264,
+          0.292054215,
+          0.291467479,
+          0.29105426,
+          0.290781942
+        ],
+        "tableValues": [
+          0.29381,
+          0.29269,
+          0.29205,
+          0.29147,
+          0.29105,
+          0.29078
+        ],
+        "sourceTableLabel": "tab:size_scaling_transformer_fixes",
+        "parameterCounts": [
+          130833,
+          130833,
+          130833,
+          130833,
+          130833,
+          130833
+        ],
+        "totalParameterCounts": [
+          130833,
+          130833,
+          130833,
+          130833,
+          130833,
+          130833
+        ],
+        "nonTrainableParameterCounts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "flopsPerEpochOneSeed": [
+          788416512000,
+          1561064693760,
+          3894777569280,
+          7773786808320,
+          11652796047360,
+          15547573616640
+        ],
+        "embeddingParameterCounts": [
+          109216,
+          109216,
+          109216,
+          109216,
+          109216,
+          109216
+        ],
+        "backboneParameterCounts": [
+          21617,
+          21617,
+          21617,
+          21617,
+          21617,
+          21617
+        ],
+        "profileConfiguration": "transformer_tokenmoe_small"
+      },
+      {
+        "configuration": "transformer_tokenmoe_medium",
+        "name": "TokenMoE (medium)",
+        "values": [
+          0.293711516,
+          0.292799342,
+          0.291868838,
+          0.291449797,
+          0.291139753,
+          0.290796463
+        ],
+        "tableValues": [
+          0.29371,
+          0.2928,
+          0.29187,
+          0.29145,
+          0.29114,
+          0.2908
+        ],
+        "sourceTableLabel": "tab:size_scaling_transformer_fixes",
+        "parameterCounts": [
+          396377,
+          396377,
+          396377,
+          396377,
+          396377,
+          396377
+        ],
+        "totalParameterCounts": [
+          396377,
+          396377,
+          396377,
+          396377,
+          396377,
+          396377
+        ],
+        "nonTrainableParameterCounts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "flopsPerEpochOneSeed": [
+          2646216499200,
+          5239508668416,
+          13072309506048,
+          26091694682112,
+          39111079858176,
+          52183389364224
+        ],
+        "embeddingParameterCounts": [
+          348266,
+          348266,
+          348266,
+          348266,
+          348266,
+          348266
+        ],
+        "backboneParameterCounts": [
+          48111,
+          48111,
+          48111,
+          48111,
+          48111,
+          48111
+        ],
+        "profileConfiguration": "transformer_tokenmoe_medium"
+      },
+      {
+        "configuration": "transformer_tokenmoe_large",
+        "name": "TokenMoE (large)",
+        "values": [
+          0.29350289,
+          0.29263432,
+          0.291857649,
+          0.291263648,
+          0.290967443,
+          0.290738308
+        ],
+        "tableValues": [
+          0.2935,
+          0.29263,
+          0.29186,
+          0.29126,
+          0.29097,
+          0.29074
+        ],
+        "sourceTableLabel": "tab:size_scaling_transformer_fixes",
+        "parameterCounts": [
+          1081075,
+          1081075,
+          1081075,
+          1081075,
+          1081075,
+          1081075
+        ],
+        "totalParameterCounts": [
+          1081075,
+          1081075,
+          1081075,
+          1081075,
+          1081075,
+          1081075
+        ],
+        "nonTrainableParameterCounts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "flopsPerEpochOneSeed": [
+          8446477516800,
+          16724025483264,
+          41725598932992,
+          83282268315648,
+          124838937698304,
+          166564536631296
+        ],
+        "embeddingParameterCounts": [
+          931402,
+          931402,
+          931402,
+          931402,
+          931402,
+          931402
+        ],
+        "backboneParameterCounts": [
+          149673,
+          149673,
+          149673,
+          149673,
+          149673,
+          149673
+        ],
+        "profileConfiguration": "transformer_tokenmoe_large"
+      }
+    ],
+    "ssl": [
+      {
+        "configuration": "transformer_tokenmoe_ssl_tiny",
+        "name": "TokenMoE+SSL (tiny)",
+        "values": [
+          0.293496155,
+          0.292688366,
+          0.291888496,
+          0.291462443,
+          0.291097144,
+          0.290750423
+        ],
+        "tableValues": [
+          0.2935,
+          0.29269,
+          0.29189,
+          0.29146,
+          0.2911,
+          0.29075
+        ],
+        "sourceTableLabel": "tab:size_scaling_transformer_fixes",
+        "parameterCounts": [
+          190836,
+          190836,
+          190836,
+          190836,
+          190836,
+          190836
+        ],
+        "totalParameterCounts": [
+          190836,
+          190836,
+          190836,
+          190836,
+          190836,
+          190836
+        ],
+        "nonTrainableParameterCounts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "flopsPerEpochOneSeed": [
+          2452252262400,
+          4855459479552,
+          12114126176256,
+          24179207307264,
+          36244288438272,
+          48358414614528
+        ],
+        "embeddingParameterCounts": [
+          125730,
+          125730,
+          125730,
+          125730,
+          125730,
+          125730
+        ],
+        "backboneParameterCounts": [
+          65106,
+          65106,
+          65106,
+          65106,
+          65106,
+          65106
+        ],
+        "profileConfiguration": "transformer_tokenmoe_tiny_selfsup"
+      },
+      {
+        "configuration": "transformer_tokenmoe_ssl_small",
+        "name": "TokenMoE+SSL (small)",
+        "values": [
+          0.29359336,
+          0.29291145,
+          0.291903975,
+          0.2914186,
+          0.29100676,
+          0.290682798
+        ],
+        "tableValues": [
+          0.29359,
+          0.29291,
+          0.2919,
+          0.29142,
+          0.29101,
+          0.29068
+        ],
+        "sourceTableLabel": "tab:size_scaling_transformer_fixes",
+        "parameterCounts": [
+          465512,
+          465512,
+          465512,
+          465512,
+          465512,
+          465512
+        ],
+        "totalParameterCounts": [
+          465512,
+          465512,
+          465512,
+          465512,
+          465512,
+          465512
+        ],
+        "nonTrainableParameterCounts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "flopsPerEpochOneSeed": [
+          6903584563200,
+          13669097435136,
+          34103707742208,
+          68069343793152,
+          102034979844096,
+          136138687586304
+        ],
+        "embeddingParameterCounts": [
+          349634,
+          349634,
+          349634,
+          349634,
+          349634,
+          349634
+        ],
+        "backboneParameterCounts": [
+          115878,
+          115878,
+          115878,
+          115878,
+          115878,
+          115878
+        ],
+        "profileConfiguration": "transformer_tokenmoe_small_selfsup"
+      },
+      {
+        "configuration": "transformer_tokenmoe_ssl_medium",
+        "name": "TokenMoE+SSL (medium)",
+        "values": [
+          0.293366497,
+          0.292630709,
+          0.291861991,
+          0.291291058,
+          0.290868456,
+          0.290619152
+        ],
+        "tableValues": [
+          0.29337,
+          0.29263,
+          0.29186,
+          0.29129,
+          0.29087,
+          0.29062
+        ],
+        "sourceTableLabel": "tab:size_scaling_transformer_fixes",
+        "parameterCounts": [
+          1055612,
+          1055612,
+          1055612,
+          1055612,
+          1055612,
+          1055612
+        ],
+        "totalParameterCounts": [
+          1055612,
+          1055612,
+          1055612,
+          1055612,
+          1055612,
+          1055612
+        ],
+        "nonTrainableParameterCounts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "flopsPerEpochOneSeed": [
+          15595225497600,
+          30878546485248,
+          77040413958144,
+          153768923406336,
+          230497432854528,
+          307537846812672
+        ],
+        "embeddingParameterCounts": [
+          746946,
+          746946,
+          746946,
+          746946,
+          746946,
+          746946
+        ],
+        "backboneParameterCounts": [
+          308666,
+          308666,
+          308666,
+          308666,
+          308666,
+          308666
+        ],
+        "profileConfiguration": "transformer_tokenmoe_medium_selfsup"
+      },
+      {
+        "configuration": "transformer_tokenmoe_ssl_large",
+        "name": "TokenMoE+SSL (large)",
+        "values": [
+          0.293320811,
+          0.292745514,
+          0.291924917,
+          0.29140389,
+          0.29087468,
+          0.290361126
+        ],
+        "tableValues": [
+          0.29332,
+          0.29275,
+          0.29192,
+          0.2914,
+          0.29087,
+          0.29036
+        ],
+        "sourceTableLabel": "tab:size_scaling_transformer_fixes",
+        "parameterCounts": [
+          1257212,
+          1257212,
+          1257212,
+          1257212,
+          1257212,
+          1257212
+        ],
+        "totalParameterCounts": [
+          1257212,
+          1257212,
+          1257212,
+          1257212,
+          1257212,
+          1257212
+        ],
+        "nonTrainableParameterCounts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "flopsPerEpochOneSeed": [
+          18947814604800,
+          37516672917504,
+          93602204147712,
+          186825452003328,
+          280048699858944,
+          373650904006656
+        ],
+        "embeddingParameterCounts": [
+          933682,
+          933682,
+          933682,
+          933682,
+          933682,
+          933682
+        ],
+        "backboneParameterCounts": [
+          323530,
+          323530,
+          323530,
+          323530,
+          323530,
+          323530
+        ],
+        "profileConfiguration": "transformer_tokenmoe_large_selfsup"
+      }
+    ],
+    "tabm": [
+      {
+        "configuration": "tabm_small",
+        "name": "TabM (small)",
+        "values": [
+          0.293886784,
+          0.292516491,
+          0.29163051,
+          0.291206135,
+          0.290803914,
+          0.290656577
+        ],
+        "tableValues": [
+          0.29389,
+          0.29252,
+          0.29163,
+          0.29121,
+          0.2908,
+          0.29066
+        ],
+        "sourceTableLabel": "tab:size_scaling_tabm",
+        "parameterCounts": [
+          107104,
+          107104,
+          107104,
+          107104,
+          107104,
+          107104
+        ],
+        "totalParameterCounts": [
+          107104,
+          107104,
+          107104,
+          107104,
+          107104,
+          107104
+        ],
+        "nonTrainableParameterCounts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "flopsPerEpochOneSeed": [
+          2398747238400,
+          4749519532032,
+          11849811357696,
+          23651647770624,
+          35453484183552,
+          47303295541248
+        ],
+        "embeddingParameterCounts": [
+          8256,
+          8256,
+          8256,
+          8256,
+          8256,
+          8256
+        ],
+        "backboneParameterCounts": [
+          98848,
+          98848,
+          98848,
+          98848,
+          98848,
+          98848
+        ],
+        "profileConfiguration": "tabm_small"
+      },
+      {
+        "configuration": "tabm_medium",
+        "name": "TabM (medium)",
+        "values": [
+          0.294426412,
+          0.293247692,
+          0.291856661,
+          0.291075531,
+          0.29063445,
+          0.290481633
+        ],
+        "tableValues": [
+          0.29443,
+          0.29325,
+          0.29186,
+          0.29108,
+          0.29063,
+          0.29048
+        ],
+        "sourceTableLabel": "tab:size_scaling_tabm",
+        "parameterCounts": [
+          340128,
+          340128,
+          340128,
+          340128,
+          340128,
+          340128
+        ],
+        "totalParameterCounts": [
+          340128,
+          340128,
+          340128,
+          340128,
+          340128,
+          340128
+        ],
+        "nonTrainableParameterCounts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "flopsPerEpochOneSeed": [
+          9631719628800,
+          19070804865024,
+          47580694966272,
+          94968755539968,
+          142356816113664,
+          189937511079936
+        ],
+        "embeddingParameterCounts": [
+          16512,
+          16512,
+          16512,
+          16512,
+          16512,
+          16512
+        ],
+        "backboneParameterCounts": [
+          323616,
+          323616,
+          323616,
+          323616,
+          323616,
+          323616
+        ],
+        "profileConfiguration": "tabm_medium"
+      },
+      {
+        "configuration": "tabm_large",
+        "name": "TabM (large)",
+        "values": [
+          0.296813419,
+          0.295453361,
+          0.292633567,
+          0.291036934,
+          0.290279714,
+          0.289842523
+        ],
+        "tableValues": [
+          0.29681,
+          0.29545,
+          0.29263,
+          0.29104,
+          0.29028,
+          0.28984
+        ],
+        "sourceTableLabel": "tab:size_scaling_tabm",
+        "parameterCounts": [
+          1327424,
+          1327424,
+          1327424,
+          1327424,
+          1327424,
+          1327424
+        ],
+        "totalParameterCounts": [
+          1327424,
+          1327424,
+          1327424,
+          1327424,
+          1327424,
+          1327424
+        ],
+        "nonTrainableParameterCounts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "flopsPerEpochOneSeed": [
+          76859131699200,
+          152181080764416,
+          379684110594048,
+          757831038554112,
+          1135977966514176,
+          1515662077108224
+        ],
+        "embeddingParameterCounts": [
+          33024,
+          33024,
+          33024,
+          33024,
+          33024,
+          33024
+        ],
+        "backboneParameterCounts": [
+          1294400,
+          1294400,
+          1294400,
+          1294400,
+          1294400,
+          1294400
+        ],
+        "profileConfiguration": "tabm_large"
+      },
+      {
+        "configuration": "tabm_xlarge",
+        "name": "TabM (xlarge)",
+        "values": [
+          0.295987234,
+          0.29566213,
+          0.292487275,
+          0.291066495,
+          0.290206804,
+          0.289835955
+        ],
+        "tableValues": [
+          0.29599,
+          0.29566,
+          0.29249,
+          0.29107,
+          0.29021,
+          0.28984
+        ],
+        "sourceTableLabel": "tab:size_scaling_tabm",
+        "parameterCounts": [
+          2961888,
+          2961888,
+          2961888,
+          2961888,
+          2961888,
+          2961888
+        ],
+        "totalParameterCounts": [
+          2961888,
+          2961888,
+          2961888,
+          2961888,
+          2961888,
+          2961888
+        ],
+        "nonTrainableParameterCounts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "flopsPerEpochOneSeed": [
+          259181181542400,
+          513178739453952,
+          1280355036819456,
+          2555526450008064,
+          3830697863196672,
+          5111052900016128
+        ],
+        "embeddingParameterCounts": [
+          49536,
+          49536,
+          49536,
+          49536,
+          49536,
+          49536
+        ],
+        "backboneParameterCounts": [
+          2912352,
+          2912352,
+          2912352,
+          2912352,
+          2912352,
+          2912352
+        ],
+        "profileConfiguration": "tabm_xlarge"
+      },
+      {
+        "configuration": "tabm_mini_small",
+        "name": "TabM-mini (small)",
+        "values": [
+          0.293796158,
+          0.292670319,
+          0.291669249,
+          0.291175108,
+          0.290967684,
+          0.290661656
+        ],
+        "tableValues": [
+          0.2938,
+          0.29267,
+          0.29167,
+          0.29118,
+          0.29097,
+          0.29066
+        ],
+        "sourceTableLabel": "tab:size_scaling_tabm",
+        "parameterCounts": [
+          99008,
+          99008,
+          99008,
+          99008,
+          99008,
+          99008
+        ],
+        "totalParameterCounts": [
+          99008,
+          99008,
+          99008,
+          99008,
+          99008,
+          99008
+        ],
+        "nonTrainableParameterCounts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "flopsPerEpochOneSeed": [
+          2395601510400,
+          4743290990592,
+          11834271461376,
+          23620630892544,
+          35406990323712,
+          47241261785088
+        ],
+        "embeddingParameterCounts": [
+          8256,
+          8256,
+          8256,
+          8256,
+          8256,
+          8256
+        ],
+        "backboneParameterCounts": [
+          90752,
+          90752,
+          90752,
+          90752,
+          90752,
+          90752
+        ],
+        "profileConfiguration": "tabm_mini_small"
+      },
+      {
+        "configuration": "tabm_mini_medium",
+        "name": "TabM-mini (medium)",
+        "values": [
+          0.294302736,
+          0.293230968,
+          0.291837985,
+          0.291100907,
+          0.290660899,
+          0.290344991
+        ],
+        "tableValues": [
+          0.2943,
+          0.29323,
+          0.29184,
+          0.2911,
+          0.29066,
+          0.29034
+        ],
+        "sourceTableLabel": "tab:size_scaling_tabm",
+        "parameterCounts": [
+          319872,
+          319872,
+          319872,
+          319872,
+          319872,
+          319872
+        ],
+        "totalParameterCounts": [
+          319872,
+          319872,
+          319872,
+          319872,
+          319872,
+          319872
+        ],
+        "nonTrainableParameterCounts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "flopsPerEpochOneSeed": [
+          9623540736000,
+          19054610657280,
+          47540291235840,
+          94888111656960,
+          142235932078080,
+          189776223313920
+        ],
+        "embeddingParameterCounts": [
+          16512,
+          16512,
+          16512,
+          16512,
+          16512,
+          16512
+        ],
+        "backboneParameterCounts": [
+          303360,
+          303360,
+          303360,
+          303360,
+          303360,
+          303360
+        ],
+        "profileConfiguration": "tabm_mini_medium"
+      },
+      {
+        "configuration": "tabm_mini_large",
+        "name": "TabM-mini (large)",
+        "values": [
+          0.296294664,
+          0.295148059,
+          0.292519553,
+          0.291044175,
+          0.290239398,
+          0.289891394
+        ],
+        "tableValues": [
+          0.29629,
+          0.29515,
+          0.29252,
+          0.29104,
+          0.29024,
+          0.28989
+        ],
+        "sourceTableLabel": "tab:size_scaling_tabm",
+        "parameterCounts": [
+          1245952,
+          1245952,
+          1245952,
+          1245952,
+          1245952,
+          1245952
+        ],
+        "totalParameterCounts": [
+          1245952,
+          1245952,
+          1245952,
+          1245952,
+          1245952,
+          1245952
+        ],
+        "nonTrainableParameterCounts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "flopsPerEpochOneSeed": [
+          76826416128000,
+          152116303933440,
+          379522495672320,
+          757508463022080,
+          1135494430371840,
+          1515016926044160
+        ],
+        "embeddingParameterCounts": [
+          33024,
+          33024,
+          33024,
+          33024,
+          33024,
+          33024
+        ],
+        "backboneParameterCounts": [
+          1212928,
+          1212928,
+          1212928,
+          1212928,
+          1212928,
+          1212928
+        ],
+        "profileConfiguration": "tabm_mini_large"
+      },
+      {
+        "configuration": "tabm_mini_xlarge",
+        "name": "TabM-mini (xlarge)",
+        "values": [
+          0.296100199,
+          0.295203427,
+          0.292626431,
+          0.291156225,
+          0.290460204,
+          0.289856367
+        ],
+        "tableValues": [
+          0.2961,
+          0.2952,
+          0.29263,
+          0.29116,
+          0.29046,
+          0.28986
+        ],
+        "sourceTableLabel": "tab:size_scaling_tabm",
+        "parameterCounts": [
+          8246272,
+          8246272,
+          8246272,
+          8246272,
+          8246272,
+          8246272
+        ],
+        "totalParameterCounts": [
+          8246272,
+          8246272,
+          8246272,
+          8246272,
+          8246272,
+          8246272
+        ],
+        "nonTrainableParameterCounts": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "flopsPerEpochOneSeed": [
+          297165798336000,
+          594331596672000,
+          1484324354726400,
+          2966391754022400,
+          4447706834841600,
+          5929021915660800
+        ],
+        "embeddingParameterCounts": [
+          132096,
+          132096,
+          132096,
+          132096,
+          132096,
+          132096
+        ],
+        "backboneParameterCounts": [
+          8114176,
+          8114176,
+          8114176,
+          8114176,
+          8114176,
+          8114176
+        ],
+        "profileConfiguration": "tabm_mini_xlarge"
+      }
+    ]
+  },
+  "scalingFits": [
+    {
+      "familyId": "glm",
+      "dataExponent": 0.091,
+      "parameterExponent": null,
+      "dataDoublingGapRemoved": 0.06112825268454791,
+      "parameterDoublingGapRemoved": null,
+      "dataTableLabel": "tab:alpha-robustness",
+      "parameterTableLabel": null,
+      "floor": 0.28749,
+      "dataExponentLow": 0.122,
+      "dataExponentHigh": 0.041,
+      "dataExponentLeaveOneFractionOut": [
+        0.075,
+        0.098
+      ],
+      "parameterEmbeddingExponent": null,
+      "parameterBackboneExponent": null
+    },
+    {
+      "familyId": "ffn",
+      "dataExponent": 0.246,
+      "parameterExponent": 0.028,
+      "dataDoublingGapRemoved": 0.15676888974988756,
+      "parameterDoublingGapRemoved": 0.019220996011448666,
+      "dataTableLabel": "tab:alpha-robustness",
+      "parameterTableLabel": "tab:beta_param_split",
+      "floor": 0.28749,
+      "dataExponentLow": 0.295,
+      "dataExponentHigh": 0.253,
+      "dataExponentLeaveOneFractionOut": [
+        0.217,
+        0.256
+      ],
+      "parameterEmbeddingExponent": 0.063,
+      "parameterBackboneExponent": 0.026
+    },
+    {
+      "familyId": "transformer",
+      "dataExponent": 0.194,
+      "parameterExponent": 0.025,
+      "dataDoublingGapRemoved": 0.1258213795896268,
+      "parameterDoublingGapRemoved": 0.017179401454748944,
+      "dataTableLabel": "tab:alpha-robustness",
+      "parameterTableLabel": "tab:beta_param_split",
+      "floor": 0.28749,
+      "dataExponentLow": 0.218,
+      "dataExponentHigh": 0.153,
+      "dataExponentLeaveOneFractionOut": [
+        0.189,
+        0.199
+      ],
+      "parameterEmbeddingExponent": 0.06,
+      "parameterBackboneExponent": 0.02
+    },
+    {
+      "familyId": "multicls",
+      "dataExponent": 0.182,
+      "parameterExponent": 0.037,
+      "dataDoublingGapRemoved": 0.11851984209282995,
+      "parameterDoublingGapRemoved": 0.025320369108451146,
+      "dataTableLabel": "tab:alpha-robustness",
+      "parameterTableLabel": "tab:beta_param_split",
+      "floor": 0.28749,
+      "dataExponentLow": 0.192,
+      "dataExponentHigh": 0.178,
+      "dataExponentLeaveOneFractionOut": [
+        0.171,
+        0.187
+      ],
+      "parameterEmbeddingExponent": 0.089,
+      "parameterBackboneExponent": 0.029
+    },
+    {
+      "familyId": "hybrid",
+      "dataExponent": 0.183,
+      "parameterExponent": 0.044,
+      "dataDoublingGapRemoved": 0.11913062587302081,
+      "parameterDoublingGapRemoved": 0.030038089658265155,
+      "dataTableLabel": "tab:alpha-robustness",
+      "parameterTableLabel": "tab:beta_param_split",
+      "floor": 0.28749,
+      "dataExponentLow": 0.182,
+      "dataExponentHigh": 0.229,
+      "dataExponentLeaveOneFractionOut": [
+        0.18,
+        0.186
+      ],
+      "parameterEmbeddingExponent": 0.102,
+      "parameterBackboneExponent": 0.04
+    },
+    {
+      "familyId": "moe",
+      "dataExponent": 0.202,
+      "parameterExponent": 0.008,
+      "dataDoublingGapRemoved": 0.1306554399099784,
+      "parameterDoublingGapRemoved": 0.005529831326785639,
+      "dataTableLabel": "tab:alpha-robustness",
+      "parameterTableLabel": "tab:beta_param_split",
+      "floor": 0.28749,
+      "dataExponentLow": 0.198,
+      "dataExponentHigh": 0.215,
+      "dataExponentLeaveOneFractionOut": [
+        0.2,
+        0.205
+      ],
+      "parameterEmbeddingExponent": 0.008,
+      "parameterBackboneExponent": 0.007
+    },
+    {
+      "familyId": "ssl",
+      "dataExponent": 0.22,
+      "parameterExponent": 0.055,
+      "dataDoublingGapRemoved": 0.14143456356224626,
+      "parameterDoublingGapRemoved": 0.03740555689824865,
+      "dataTableLabel": "tab:alpha-robustness",
+      "parameterTableLabel": "tab:beta_param_split",
+      "floor": 0.28749,
+      "dataExponentLow": 0.179,
+      "dataExponentHigh": 0.398,
+      "dataExponentLeaveOneFractionOut": [
+        0.197,
+        0.238
+      ],
+      "parameterEmbeddingExponent": 0.053,
+      "parameterBackboneExponent": 0.058
+    },
+    {
+      "familyId": "tabm",
+      "dataExponent": 0.309,
+      "parameterExponent": 0.148,
+      "dataDoublingGapRemoved": 0.19279892549523514,
+      "parameterDoublingGapRemoved": 0.09749927253756996,
+      "dataTableLabel": "tab:alpha-robustness",
+      "parameterTableLabel": "tab:beta_param_split",
+      "floor": 0.28749,
+      "dataExponentLow": 0.259,
+      "dataExponentHigh": 0.601,
+      "dataExponentLeaveOneFractionOut": [
+        0.283,
+        0.323
+      ],
+      "parameterEmbeddingExponent": 0.249,
+      "parameterBackboneExponent": 0.146
+    }
+  ],
+  "scalingFitBasis": {
+    "data": "Main-sweep best-of-size family envelopes over six nested training fractions; the selected model size may change with data size.",
+    "parameters": "Independently fitted parameter/loss Pareto sets at full training data, using total trainable parameters. No GLM parameter-scaling exponent is reported.",
+    "normalizedGap": "Each doubling illustration normalizes its own fitted relation to an initial reducible gap of 1; the gap removed is 1 - 2^(-exponent). Values are proportions, not percentage points.",
+    "interpretation": "These are separate univariate descriptive fits, not jointly identified causal effects. Do not multiply their gap reductions to predict the result of increasing data and parameters together.",
+    "parameterAccounting": "Trainable parameters in one model instance, including its internal ensemble where applicable; not multiplied by the five independent seeds.",
+    "totalParameterAccounting": "Total parameter counts additionally include non-trainable model state. These are exposed separately from the trainable P used in the parameter-scaling fits.",
+    "computeAccounting": "Training FLOPs per epoch for one seed, as profiled; not total training cost. Five-seed ensemble training requires five times this per-epoch proxy, before allowing for differing epoch counts."
+  },
+  "fit": {
+    "floor": 0.28749,
+    "alpha": 0.409,
+    "amplitude": 1.03,
+    "mainSweepAlpha": 0.309,
+    "familyId": "tabm",
+    "includesFullDataExtension": true,
+    "trainingRowsRange": [
+      201985,
+      4034782
+    ],
+    "doublingRemainingGapMultiplier": 0.7531452333169062,
+    "interpretation": "An illustrative fit to the best-achieved TabM/TabM-mini envelope, including the gigantic full-data-only extension. The floor is fitted, not a proven irreducible limit."
+  },
+  "protocol": {
+    "target": "Motor claim frequency",
+    "metric": "Mean held-out Poisson deviance",
+    "lowerIsBetter": true,
+    "ensembleSeeds": 5,
+    "split": "90/10 IID random train/test split",
+    "nestedTrainingSubsets": true,
+    "fixedTestSet": true,
+    "exposureOffset": true,
+    "selection": "Pointwise minimum test deviance over each family's fixed main-sweep size ladder; predictions are averaged over five independent training seeds before scoring."
+  },
+  "limitations": [
+    "One confidential motor portfolio; the fitted slopes and rankings need not transfer to other datasets or targets.",
+    "The split is IID, not a temporal deployment evaluation.",
+    "Family envelopes select configurations on test performance and are descriptive, not an unbiased deployment estimate.",
+    "Full-data-only extensions were trained only at 100%; they do not form a matched six-fraction size ladder.",
+    "Fixed expert-selected recipes were used, without a systematic hyperparameter search or a comparable GBDT sweep.",
+    "Seed-level uncertainty describes training-run variability, not uncertainty over held-out policies.",
+    "Lower frequency deviance is a statistical fit improvement; it does not directly establish profit, premium, or loss-ratio improvement.",
+    "Data and parameter exponents come from separate univariate envelope fits; their normalized gap reductions do not establish a joint causal scaling law."
+  ],
+  "source": {
+    "title": "Scaling Laws, Tabular Data and Actuarial Ratemaking Models",
+    "author": "Ronald Richman",
+    "version": "Version of May 1, 2026",
+    "mainTableLabel": "tab:main-scaling",
+    "supplementRepository": "https://github.com/RonRichman/frmtpl-scaling-laws",
+    "supplementScope": "A separate public French MTPL illustration; it is not the source of the proprietary-portfolio results plotted here.",
+    "manuscriptSha256": "48aab6109b5515fca110341baf81528c68f3a22ef85f50c4cc2453c79c45ae34",
+    "aggregateResultsSha256": "0281918db77f87fef5296dd9c20ebbc8893f73598e80e93179ad0c71fb182508",
+    "parameterProfilesSha256": "4a34f9d7a8f253e182f7f730af5aaf18592704189cf76d8b9919734eaba46090",
+    "parameterBasisNotes": "The parameter-plot scripts and scaling-fit notebook use params_trainable. Several approximate counts in the paper's representative resource table align with params_total instead. The interactive size-ladder data expose trainable and total counts separately.",
+    "precision": "CSV precision retained only after reconciliation with final manuscript values to five decimal places.",
+    "dataQualityNotes": [
+      "The source leaves train_set_size blank for transformer_large at 10%; the shared nested-fraction count of 404,283 is confirmed by every populated row at that fraction."
+    ],
+    "privacy": "Only aggregate model scores, model parameter and compute counts, training-set sizes, model configuration names and published study metadata are included. No policy records, identifiers, predictions or private filesystem paths are included."
+  }
+}

@@ -1,0 +1,52 @@
+family_id,family,series,training_fraction,training_rows,test_poisson_deviance,manuscript_deviance_5dp,configuration,prediction_ensemble_seeds
+glm,Generalized linear model,main_sweep_envelope,0.05,201985,0.29343383,0.29343,glm,5
+glm,Generalized linear model,main_sweep_envelope,0.1,404283,0.292840879,0.29284,glm,5
+glm,Generalized linear model,main_sweep_envelope,0.25,1010056,0.29236294,0.29236,glm,5
+glm,Generalized linear model,main_sweep_envelope,0.5,2018631,0.292124729,0.29212,glm,5
+glm,Generalized linear model,main_sweep_envelope,0.75,3026912,0.292035595,0.29204,glm,5
+glm,Generalized linear model,main_sweep_envelope,1.0,4034782,0.291996624,0.29200,glm,5
+ffn,Feed-forward network,main_sweep_envelope,0.05,201985,0.294241353,0.29424,ffn_very_small,5
+ffn,Feed-forward network,main_sweep_envelope,0.1,404283,0.292665232,0.29267,ffn_very_small,5
+ffn,Feed-forward network,main_sweep_envelope,0.25,1010056,0.291664313,0.29166,ffn_medium,5
+ffn,Feed-forward network,main_sweep_envelope,0.5,2018631,0.291181574,0.29118,ffn_very_large,5
+ffn,Feed-forward network,main_sweep_envelope,0.75,3026912,0.290859278,0.29086,ffn_very_large,5
+ffn,Feed-forward network,main_sweep_envelope,1.0,4034782,0.290583286,0.29058,ffn_very_large,5
+transformer,Vanilla Transformer,main_sweep_envelope,0.05,201985,0.293396745,0.29340,transformer_large,5
+transformer,Vanilla Transformer,main_sweep_envelope,0.1,404283,0.292742464,0.29274,transformer_small,5
+transformer,Vanilla Transformer,main_sweep_envelope,0.25,1010056,0.291663,0.29166,transformer_medium,5
+transformer,Vanilla Transformer,main_sweep_envelope,0.5,2018631,0.2912212,0.29122,transformer_medium,5
+transformer,Vanilla Transformer,main_sweep_envelope,0.75,3026912,0.290998126,0.29100,transformer_medium,5
+transformer,Vanilla Transformer,main_sweep_envelope,1.0,4034782,0.290845812,0.29085,transformer_medium,5
+multicls,MultiCLS Transformer,main_sweep_envelope,0.05,201985,0.293211324,0.29321,transformer_multicls_medium,5
+multicls,MultiCLS Transformer,main_sweep_envelope,0.1,404283,0.292324009,0.29232,transformer_multicls_large,5
+multicls,MultiCLS Transformer,main_sweep_envelope,0.25,1010056,0.291675642,0.29168,transformer_multicls_medium,5
+multicls,MultiCLS Transformer,main_sweep_envelope,0.5,2018631,0.291203554,0.29120,transformer_multicls_medium,5
+multicls,MultiCLS Transformer,main_sweep_envelope,0.75,3026912,0.290892129,0.29089,transformer_multicls_large,5
+multicls,MultiCLS Transformer,main_sweep_envelope,1.0,4034782,0.290779673,0.29078,transformer_multicls_medium,5
+hybrid,Transformer + TabM-mini,main_sweep_envelope,0.05,201985,0.292824917,0.29282,transformer_multicls_tabm_mini_medium,5
+hybrid,Transformer + TabM-mini,main_sweep_envelope,0.1,404283,0.292167767,0.29217,transformer_multicls_tabm_mini_medium,5
+hybrid,Transformer + TabM-mini,main_sweep_envelope,0.25,1010056,0.291471443,0.29147,transformer_multicls_tabm_mini_medium,5
+hybrid,Transformer + TabM-mini,main_sweep_envelope,0.5,2018631,0.291078628,0.29108,transformer_multicls_tabm_mini_large,5
+hybrid,Transformer + TabM-mini,main_sweep_envelope,0.75,3026912,0.290687997,0.29069,transformer_multicls_tabm_mini_medium,5
+hybrid,Transformer + TabM-mini,main_sweep_envelope,1.0,4034782,0.290561046,0.29056,transformer_multicls_tabm_mini_medium,5
+moe,TokenMoE Transformer,main_sweep_envelope,0.05,201985,0.29350289,0.29350,transformer_tokenmoe_large,5
+moe,TokenMoE Transformer,main_sweep_envelope,0.1,404283,0.29263432,0.29263,transformer_tokenmoe_large,5
+moe,TokenMoE Transformer,main_sweep_envelope,0.25,1010056,0.291857649,0.29186,transformer_tokenmoe_large,5
+moe,TokenMoE Transformer,main_sweep_envelope,0.5,2018631,0.291263648,0.29126,transformer_tokenmoe_large,5
+moe,TokenMoE Transformer,main_sweep_envelope,0.75,3026912,0.290967443,0.29097,transformer_tokenmoe_large,5
+moe,TokenMoE Transformer,main_sweep_envelope,1.0,4034782,0.290738308,0.29074,transformer_tokenmoe_large,5
+ssl,TokenMoE + self-supervision,main_sweep_envelope,0.05,201985,0.293320811,0.29332,transformer_tokenmoe_ssl_large,5
+ssl,TokenMoE + self-supervision,main_sweep_envelope,0.1,404283,0.292630709,0.29263,transformer_tokenmoe_ssl_medium,5
+ssl,TokenMoE + self-supervision,main_sweep_envelope,0.25,1010056,0.291861991,0.29186,transformer_tokenmoe_ssl_medium,5
+ssl,TokenMoE + self-supervision,main_sweep_envelope,0.5,2018631,0.291291058,0.29129,transformer_tokenmoe_ssl_medium,5
+ssl,TokenMoE + self-supervision,main_sweep_envelope,0.75,3026912,0.290868456,0.29087,transformer_tokenmoe_ssl_medium,5
+ssl,TokenMoE + self-supervision,main_sweep_envelope,1.0,4034782,0.290361126,0.29036,transformer_tokenmoe_ssl_large,5
+tabm,TabM / TabM-mini,main_sweep_envelope,0.05,201985,0.293796158,0.29380,tabm_mini_small,5
+tabm,TabM / TabM-mini,main_sweep_envelope,0.1,404283,0.292516491,0.29252,tabm_small,5
+tabm,TabM / TabM-mini,main_sweep_envelope,0.25,1010056,0.29163051,0.29163,tabm_small,5
+tabm,TabM / TabM-mini,main_sweep_envelope,0.5,2018631,0.291036934,0.29104,tabm_large,5
+tabm,TabM / TabM-mini,main_sweep_envelope,0.75,3026912,0.290206804,0.29021,tabm_xlarge,5
+tabm,TabM / TabM-mini,main_sweep_envelope,1.0,4034782,0.289835955,0.28984,tabm_xlarge,5
+ssl,TokenMoE + SSL (xlarge),full_data_only_extension,1.0,4034782,0.290273059,0.29027,transformer_tokenmoessl_xlarge,5
+tabm,TabM-mini (xlarge-2),full_data_only_extension,1.0,4034782,0.289032431,0.28903,tabm_mini_xlarge_2,5
+tabm,TabM-mini (gigantic),full_data_only_extension,1.0,4034782,0.288854567,0.28885,tabm_mini_xlarge3,5

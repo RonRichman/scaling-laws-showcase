@@ -1,0 +1,1390 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#111d29" />
+    <meta
+      name="description"
+      content="An interactive guide to scaling laws in actuarial ratemaking. Explore how data, model architecture and compute change the performance of insurance frequency models. Research by Ronald Richman."
+    />
+    <meta
+      property="og:title"
+      content="Scaling Laws — Bigger isn't the whole story"
+    />
+    <meta
+      property="og:description"
+      content="4 million training records. Eight model families. A new perspective on how insurance models learn at scale."
+    />
+    <meta property="og:type" content="website" />
+    <title>Scaling Laws — The science of better insurance models</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="scaling-explorers.css" />
+    <script defer src="data/research.js"></script>
+    <script defer src="app.js"></script>
+    <script defer src="scaling-explorers.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="reading-progress" aria-hidden="true">
+      <span id="reading-progress"></span>
+    </div>
+    <header class="site-header">
+      <a class="wordmark" href="#top" aria-label="Scaling Laws home"
+        ><svg viewBox="0 0 32 32" aria-hidden="true">
+          <path
+            d="M3 5c5 0 3 22 26 22M3 13c7 0 5 14 26 14M3 21c8 0 10 6 26 6"
+          /></svg
+        ><span>SCALING<span class="wordmark-light"> LAWS</span></span></a
+      >
+      <button
+        class="menu-toggle"
+        aria-expanded="false"
+        aria-controls="main-nav"
+      >
+        Menu <span aria-hidden="true">+</span>
+      </button>
+      <nav id="main-nav" aria-label="Main navigation">
+        <a href="#question">The question</a
+        ><a href="#experiment">The experiment</a
+        ><a href="#results">The results</a>
+        <a class="nav-paper" href="#research"
+          >Read the research <span aria-hidden="true">↗</span></a
+        >
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero dark" id="top" aria-labelledby="hero-title">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-copy">
+          <p class="eyebrow">
+            <span class="live-dot" aria-hidden="true"></span> An exploration in
+            actuarial machine learning
+          </p>
+          <h1 id="hero-title">
+            Bigger isn’t<br />the whole<br /><em>story.</em>
+          </h1>
+          <p class="hero-description">
+            On four million training records, TabM made better use of additional
+            data and model capacity than standard Transformers. Explore where
+            improvement continues—and where it slows.
+          </p>
+          <a class="button button-mint" href="#results"
+            >Explore the findings <span aria-hidden="true">↗</span></a
+          >
+          <p class="hero-byline">
+            Research by <strong>Ronald Richman</strong><br /><span
+              >insureai · Bayes Business School</span
+            >
+          </p>
+          <p class="hero-sponsor">
+            Research funded by the<br />
+            <a href="#acknowledgements">Casualty Actuarial Society (CAS)</a>
+          </p>
+        </div>
+        <div class="hero-art">
+          <div class="art-topline mono">
+            <span>THE LANDSCAPE OF LEARNING</span><span>FIG. 001</span>
+          </div>
+          <canvas
+            id="landscape"
+            aria-label="Illustrative landscape of diminishing returns: a curved surface descends and flattens as data and model capacity increase."
+            role="img"
+          ></canvas>
+          <div class="art-equation" aria-hidden="true">
+            L(D) = L<sub>∞</sub> + A · D<sup>−α</sup>
+          </div>
+          <div class="art-bottomline">
+            <span class="mono">Conceptual surface · diminishing returns</span
+            ><button
+              id="motion-toggle"
+              class="motion-toggle"
+              aria-pressed="false"
+              aria-label="Pause landscape animation"
+            >
+              <span aria-hidden="true">Ⅱ</span> Pause motion
+            </button>
+          </div>
+        </div>
+        <div class="hero-bottom">
+          <span class="mono">A visual field guide to the research</span
+          ><a href="#question"
+            >Scroll to discover <span aria-hidden="true">↓</span></a
+          >
+        </div>
+      </section>
+
+      <div class="stats-strip" aria-label="The study at a glance">
+        <div>
+          <strong>4.03<span>M</span></strong
+          ><span>training policy-period records</span>
+        </div>
+        <div><strong>8</strong><span>model families compared</span></div>
+        <div><strong>6</strong><span>nested training fractions</span></div>
+        <div><strong>3</strong><span>dimensions of scale</span></div>
+      </div>
+
+      <section
+        class="section question-section"
+        id="question"
+        aria-labelledby="question-title"
+      >
+        <div class="section-marker">
+          <span>01 / THE QUESTION</span><span>FROM INTUITION TO EVIDENCE</span>
+        </div>
+        <div class="intro-grid">
+          <h2 id="question-title">
+            Can we predict<br />what makes a<br />model <em>better?</em>
+          </h2>
+          <div class="intro-copy">
+            <p class="lead">
+              More data brings credibility. The harder question is how quickly a
+              model improves, and when further complexity stops paying.
+            </p>
+            <p>
+              This study predicts claim frequency: how often claims occur. The
+              inputs are policy records with driver characteristics, vehicle
+              details and earned exposure. Most records have a zero claim count,
+              so a model must learn useful relationships from sparse outcomes.
+            </p>
+            <p>
+              The experiment grows the training set, compares model sizes, and
+              measures performance on unseen records. It asks which models keep
+              improving with scale, how much each increase buys, and where a
+              larger network simply adds cost.
+            </p>
+            <a class="text-link" href="#experiment"
+              >See how the question was tested
+              <span aria-hidden="true">↓</span></a
+            >
+          </div>
+        </div>
+        <div class="three-levers">
+          <article>
+            <div class="lever-top">
+              <span class="math-letter">D</span
+              ><span class="mono">01 / DATA</span>
+            </div>
+            <h3>More to learn from.</h3>
+            <p>
+              Increase the number of policy records. Does the model keep finding
+              useful patterns as the portfolio grows?
+            </p>
+            <div class="micro-viz data-viz" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i
+              ><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+          </article>
+          <article>
+            <div class="lever-top">
+              <span class="math-letter">P</span
+              ><span class="mono">02 / CAPACITY</span>
+            </div>
+            <h3>More room to learn.</h3>
+            <p>
+              Parameters are the adjustable numbers a model learns during
+              training. More parameters give it room to represent more complex
+              relationships, if the data and model design support them.
+            </p>
+            <svg class="micro-viz" viewBox="0 0 260 42" aria-hidden="true">
+              <g stroke="currentColor" stroke-opacity=".25">
+                <path
+                  d="M10 21L80 6L160 21L245 6M10 21L80 36L160 21L245 36M80 6L160 6L245 21M80 36L160 36L245 21M80 6L160 36M80 36L160 6"
+                />
+              </g>
+              <g fill="currentColor">
+                <circle cx="10" cy="21" r="4" />
+                <circle cx="80" cy="6" r="4" />
+                <circle cx="80" cy="36" r="4" />
+                <circle cx="160" cy="6" r="4" />
+                <circle cx="160" cy="21" r="4" />
+                <circle cx="160" cy="36" r="4" />
+                <circle cx="245" cy="6" r="4" />
+                <circle cx="245" cy="21" r="4" />
+                <circle cx="245" cy="36" r="4" />
+              </g>
+            </svg>
+          </article>
+          <article>
+            <div class="lever-top">
+              <span class="math-letter">C</span
+              ><span class="mono">03 / COMPUTE</span>
+            </div>
+            <h3>More work to get there.</h3>
+            <p>
+              Measure the computational cost. How much predictive improvement
+              does the extra training work buy?
+            </p>
+            <div class="micro-viz compute-viz" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span
+              ><span></span><span></span><span></span><span></span><span></span
+              ><span></span><span></span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section
+        class="section experiment-section"
+        id="experiment"
+        aria-labelledby="experiment-title"
+      >
+        <div class="section-marker">
+          <span>02 / THE EXPERIMENT</span
+          ><span>ONE TASK. A CONTROLLED COMPARISON.</span>
+        </div>
+        <div class="section-heading">
+          <h2 id="experiment-title">
+            Same problem.<br /><em>Different ways to learn.</em>
+          </h2>
+          <p>
+            Predict claim frequency, increase the training data in stages, and
+            measure performance on the same held-out test set.
+          </p>
+        </div>
+        <div class="protocol">
+          <div class="protocol-step">
+            <span class="step-index">01</span>
+            <h3>Start with real policies</h3>
+            <p>
+              An anonymized motor portfolio of approximately 4.5 million
+              policy-period records. About 95% have no claim.
+            </p>
+            <div class="claim-grid" aria-hidden="true"></div>
+            <span class="viz-caption"
+              ><i></i> Claim record &nbsp; <i class="empty-dot"></i> No claim ·
+              illustrative 5/95 split</span
+            >
+          </div>
+          <div class="protocol-step">
+            <span class="step-index">02</span>
+            <h3>Grow the training set</h3>
+            <p>
+              A fixed 90/10 IID train–test split. Smaller training subsets sit
+              inside the larger ones, from 5% to 100%.
+            </p>
+            <div class="fraction-bars" aria-hidden="true">
+              <span style="--w: 5%">5</span><span style="--w: 10%">10</span
+              ><span style="--w: 25%">25</span><span style="--w: 50%">50</span
+              ><span style="--w: 75%">75</span
+              ><span style="--w: 100%">100%</span>
+            </div>
+          </div>
+          <div class="protocol-step">
+            <span class="step-index">03</span>
+            <h3>Train, average, evaluate</h3>
+            <p>
+              Train each configuration with five random seeds. Average their
+              predictions, then score the ensemble with Poisson deviance.
+            </p>
+            <div class="seed-viz" aria-hidden="true">
+              <div><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i></div>
+              <span>↓</span><strong>ONE ENSEMBLE PREDICTION</strong>
+            </div>
+          </div>
+        </div>
+        <details class="metric-details">
+          <summary>
+            <span
+              ><span class="detail-icon" aria-hidden="true">＋</span> What does
+              Poisson deviance tell us?</span
+            ><span class="mono">THE METRIC, EXPLAINED</span>
+          </summary>
+          <div>
+            <p>
+              Each model predicts a claim rate. Multiplying that rate by earned
+              exposure gives an expected claim count. Poisson deviance measures
+              how well those expected counts fit the observed counts on unseen
+              records. <strong>Lower is better.</strong>
+            </p>
+            <p>
+              A drop from 0.29200 to 0.28885 is about a 1.1% relative
+              improvement in this loss. It is a measure of predictive fit; it
+              does not directly mean 1.1% more profit or 1.1% lower premiums.
+            </p>
+            <p class="equation-small">
+              Expected claims = exposure × predicted claim rate
+            </p>
+          </div>
+        </details>
+      </section>
+
+      <section
+        class="section results-section"
+        id="results"
+        aria-labelledby="results-title"
+      >
+        <div class="section-marker">
+          <span>03 / THE RESULTS</span
+          ><span>EXPLORE THE OBSERVED EVIDENCE</span>
+        </div>
+        <div class="section-heading">
+          <h2 id="results-title">Watch the<br /><em>advantage shift.</em></h2>
+          <p>
+            A model’s ranking depends on how much data it sees. Compare the best
+            result in each family at every training fraction. The score is
+            Poisson deviance: how closely expected claim counts fit unseen
+            outcomes. Lower is better.
+          </p>
+        </div>
+        <div class="explorer">
+          <div class="explorer-toolbar">
+            <div class="chart-mode" role="group" aria-label="Chart comparison">
+              <button class="active" data-preset="story" aria-pressed="true">
+                The main story</button
+              ><button data-preset="all" aria-pressed="false">
+                All 8 families
+              </button>
+            </div>
+            <label class="extension-toggle"
+              ><input id="extensions" type="checkbox" /><span
+                >Include full-data extensions</span
+              ></label
+            >
+          </div>
+          <div
+            id="family-toggles"
+            class="family-toggles"
+            role="group"
+            aria-label="Show or hide model families"
+          ></div>
+          <div class="results-layout">
+            <div class="chart-area">
+              <div class="chart-axis-heading">
+                <span>TEST POISSON DEVIANCE</span><span>↓ LOWER IS BETTER</span>
+              </div>
+              <svg
+                id="results-chart"
+                viewBox="0 0 850 390"
+                role="img"
+                aria-labelledby="chart-title chart-desc"
+              >
+                <title id="chart-title">
+                  Test Poisson deviance across six training fractions
+                </title>
+                <desc id="chart-desc">
+                  Interactive comparison of observed family envelopes. The
+                  complete values are available in the data table below.
+                </desc>
+              </svg>
+              <div class="chart-x-caption mono">
+                TRAINING POLICY-PERIOD RECORDS · LOGARITHMIC SCALE
+              </div>
+            </div>
+            <aside class="result-readout" aria-live="polite" aria-atomic="true">
+              <span class="eyebrow">AT THIS DATA SIZE</span
+              ><strong id="selected-rows">4.03M</strong
+              ><span id="selected-fraction" class="readout-fraction"
+                >100% of training data</span
+              >
+              <div class="readout-divider"></div>
+              <span class="mono">LOWEST OBSERVED LOSS · ALL FAMILIES</span>
+              <h3 id="selected-leader">TabM / TabM-mini</h3>
+              <div class="leader-value" id="selected-loss">0.28984</div>
+              <p id="selected-note">
+                The advantage of TabM grows at larger data sizes.
+              </p>
+              <span class="readout-footnote"
+                >Numerical ranking of the reported envelopes.</span
+              >
+            </aside>
+          </div>
+          <div class="data-slider">
+            <label for="data-fraction"
+              >Explore a training fraction
+              <span id="fraction-label">100%</span></label
+            ><input
+              type="range"
+              id="data-fraction"
+              min="0"
+              max="5"
+              step="1"
+              value="5"
+              aria-valuetext="100 percent, 4,034,782 training records"
+            />
+            <div class="range-ticks" aria-hidden="true">
+              <span>5%</span><span>10%</span><span>25%</span><span>50%</span
+              ><span>75%</span><span>100%</span>
+            </div>
+          </div>
+          <p class="chart-source">
+            Source: main paper, family-envelope table. Points show the best test
+            result across sizes; predictions are averaged across five seeds.
+            Lines connect observed points. When enabled, diamonds mark separate
+            full-data-only runs.
+            <a href="#scope">Read the interpretation notes ↗</a>
+          </p>
+          <details class="data-details">
+            <summary>
+              View the complete results table <span aria-hidden="true">＋</span>
+            </summary>
+            <div
+              class="table-scroll"
+              tabindex="0"
+              role="region"
+              aria-label="Results table, scroll horizontally on small screens"
+            >
+              <table id="results-table">
+                <caption>
+                  Test Poisson deviance · lower is better
+                </caption>
+              </table>
+            </div>
+            <a class="text-link" href="data/scaling-results.csv" download
+              >Download the plotted data (.csv)
+              <span aria-hidden="true">↓</span></a
+            >
+          </details>
+        </div>
+        <div class="findings-row">
+          <article>
+            <span class="finding-number">01</span>
+            <h3>Strong baselines matter.</h3>
+            <p>
+              GLMs remain competitive and stable. At smaller fractions, the
+              Transformer + TabM hybrid has the lowest observed ensemble loss.
+            </p>
+          </article>
+          <article>
+            <span class="finding-number">02</span>
+            <h3>Capacity needs the right design.</h3>
+            <p>
+              Standard Transformers gain little from extra parameters. TabM
+              converts increased capacity into better held-out fit more
+              effectively.
+            </p>
+          </article>
+          <article>
+            <span class="finding-number">03</span>
+            <h3>The gap opens with data.</h3>
+            <p>
+              At 75% and 100%, TabM’s advantage has stronger support across
+              seeds. The tiny difference at 50% is not a firm crossover.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section
+        class="section returns-section"
+        id="diminishing-data"
+        aria-labelledby="returns-title"
+      >
+        <div class="section-marker">
+          <span>04 / THE RETURN ON MORE DATA</span
+          ><span>ONE MODEL. TWO STAGES OF LEARNING.</span>
+        </div>
+        <div class="returns-intro">
+          <h2 id="returns-title">
+            More records.<br /><em>Less left to learn.</em>
+          </h2>
+          <div>
+            <p class="lead">
+              Additional data can still improve a model after the biggest gains
+              have passed. This GLM shows how sharply the return per added
+              record can fall.
+            </p>
+            <p>
+              Consider the same GLM specification at two stages of this
+              experiment. The later interval adds almost ten times as many
+              records, yet produces less than a quarter of the absolute
+              improvement in test deviance.
+            </p>
+          </div>
+        </div>
+        <div class="returns-ledger">
+          <article>
+            <span class="eyebrow">EARLY IN THE CURVE · 5% → 10%</span>
+            <div class="ledger-flow">
+              <strong id="early-added">202,298</strong
+              ><span>additional training records</span>
+            </div>
+            <div class="ledger-loss">
+              <span>Reduction in test deviance</span
+              ><strong id="early-gain">0.000593</strong>
+            </div>
+            <div class="return-unit">
+              <span>Gain per 1 million added rows</span
+              ><strong id="early-unit">0.002931</strong>
+              <div class="return-track" aria-hidden="true">
+                <i style="width: 100%"></i>
+              </div>
+            </div>
+          </article>
+          <article>
+            <span class="eyebrow">LATER IN THE CURVE · 50% → 100%</span>
+            <div class="ledger-flow">
+              <strong id="late-added">2,016,151</strong
+              ><span>additional training records</span>
+            </div>
+            <div class="ledger-loss">
+              <span>Reduction in test deviance</span
+              ><strong id="late-gain">0.000128</strong>
+            </div>
+            <div class="return-unit">
+              <span>Gain per 1 million added rows</span
+              ><strong id="late-unit">0.000064</strong>
+              <div class="return-track" aria-hidden="true">
+                <i id="late-return-bar" style="width: 2.2%"></i>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="returns-conclusion">
+          <strong><span id="return-ratio">46</span>×</strong>
+          <p>
+            The early interval delivers about
+            <span id="return-ratio-copy">46</span> times the improvement per
+            added row. The model still improves later; each extra record buys
+            much less.
+          </p>
+        </div>
+        <p class="evidence-note">
+          Observed GLM ensemble results, using the aggregate CSV’s full
+          precision. “Per million” normalizes the two interval averages for
+          comparison; it is not a forecast of what a new million records would
+          achieve. D means training policy-period rows, denoted N in the paper.
+        </p>
+      </section>
+
+      <section
+        class="section size-section"
+        id="size-effects"
+        aria-labelledby="size-title"
+      >
+        <div class="section-marker">
+          <span>05 / INSIDE THE MODEL-SIZE SWEEPS</span
+          ><span>THE RESULTS BEHIND THE WINNING CURVES</span>
+        </div>
+        <div class="section-heading">
+          <h2 id="size-title">When does<br /><em>bigger become better?</em></h2>
+          <p>
+            The family curves hide a crucial detail: different model sizes win
+            at different amounts of data. Open up those comparisons here—<span
+              id="size-score-count"
+              >198</span
+            >
+            observed scores across <span id="size-config-count">33</span> neural
+            configurations.
+          </p>
+        </div>
+        <div class="size-explorer">
+          <div class="size-toolbar">
+            <div class="control-field">
+              <label for="size-family">Model family</label
+              ><select id="size-family">
+                <option value="tabm">TabM</option>
+                <option value="tabm_mini">TabM-mini</option>
+                <option value="transformer">Vanilla Transformer</option>
+                <option value="ffn">Feed-forward network</option>
+                <option value="multicls">MultiCLS Transformer</option>
+                <option value="hybrid">Transformer + TabM</option>
+                <option value="moe">TokenMoE</option>
+                <option value="ssl">TokenMoE + SSL</option>
+              </select>
+            </div>
+            <div
+              class="chart-mode size-modes"
+              role="group"
+              aria-label="Model-size chart horizontal axis"
+            >
+              <button data-size-axis="P" aria-pressed="true" class="active">
+                Grow the model · P</button
+              ><button data-size-axis="D" aria-pressed="false">
+                Grow the data · D
+              </button>
+            </div>
+          </div>
+          <div class="size-guide">
+            <span class="figure-tag">OBSERVED RESULTS</span>
+            <p id="size-guide-copy">
+              Hold the training data fixed. Compare the actual loss at each
+              tested parameter count.
+            </p>
+          </div>
+          <div
+            id="size-legend"
+            class="size-legend"
+            aria-label="Model sizes in the chart"
+          ></div>
+          <div class="size-plot-grid">
+            <div class="size-plot">
+              <div class="plot-topline">
+                <span>TEST POISSON DEVIANCE</span><span>↓ LOWER IS BETTER</span>
+              </div>
+              <svg
+                id="size-chart"
+                viewBox="0 0 800 380"
+                role="img"
+                aria-labelledby="size-chart-title size-chart-description"
+              >
+                <title id="size-chart-title">
+                  Model size and test performance
+                </title>
+                <desc id="size-chart-description">
+                  Observed losses by model configuration. All numerical results
+                  are available in the table below.
+                </desc>
+              </svg>
+              <p class="plot-axis-label" id="size-axis-label">
+                TRAINABLE PARAMETERS P · LOGARITHMIC SCALE
+              </p>
+            </div>
+            <aside class="size-readout" aria-live="polite" aria-atomic="true">
+              <span class="eyebrow">BEST TESTED SIZE AT THIS D</span>
+              <h3 id="size-winner">Small</h3>
+              <strong id="size-best-loss">0.29389</strong>
+              <p id="size-winner-params"></p>
+              <div class="size-readout-rule"></div>
+              <span class="eyebrow">FROM SMALLEST TO LARGEST</span>
+              <p id="size-change"></p>
+              <p class="size-interpretation" id="size-interpretation"></p>
+            </aside>
+          </div>
+          <div class="size-slider-row">
+            <div>
+              <label for="size-fraction"
+                >Training data
+                <output for="size-fraction" id="size-fraction-label"
+                  >5% · 201,985 rows</output
+                ></label
+              ><input
+                id="size-fraction"
+                type="range"
+                min="0"
+                max="5"
+                step="1"
+                value="0"
+              />
+              <div class="range-ticks" aria-hidden="true">
+                <span>5%</span><span>10%</span><span>25%</span><span>50%</span
+                ><span>75%</span><span>100%</span>
+              </div>
+            </div>
+            <label class="extension-toggle"
+              ><input id="size-extensions" type="checkbox" disabled /><span
+                >Add full-data extensions<br /><small id="size-extension-help"
+                  >Available for TabM-mini and SSL at 100%</small
+                ></span
+              ></label
+            >
+          </div>
+          <p id="capacity-workflow-note" class="capacity-note" hidden>
+            The TabM-mini xlarge-2 run has the same 8,246,272 trainable
+            parameters as xlarge, but comes from a separate workflow. Its lower
+            loss is not evidence of a benefit from increasing P.
+          </p>
+          <p class="evidence-note size-source">
+            Every point is an observed five-seed prediction-ensemble score. P
+            counts trainable parameters in one model, including any internal
+            ensemble. Lines connect tested configurations; diamonds identify
+            full-data-only additions. The vertical scale stays fixed within a
+            family as you move through D.
+          </p>
+          <details class="data-details">
+            <summary>
+              Inspect every model-size result <span aria-hidden="true">＋</span>
+            </summary>
+            <div
+              class="table-scroll"
+              tabindex="0"
+              role="region"
+              aria-label="All model-size scores; scroll horizontally on small screens"
+            >
+              <table id="size-table">
+                <caption>
+                  Model-size sweeps: held-out Poisson deviance
+                </caption>
+              </table>
+            </div>
+            <a class="text-link" href="data/size-scaling-results.csv" download
+              >Download all model-size results (.csv)
+              <span aria-hidden="true">↓</span></a
+            >
+          </details>
+        </div>
+        <div class="size-stories">
+          <article>
+            <span class="finding-number">01 / THE SMALL-DATA TRAP</span>
+            <h3>The same bigger model can hurt, then help.</h3>
+            <p>
+              At 5% data, TabM small scores 0.29389 and TabM large scores
+              0.29681: the larger model is worse. At full data, large reaches
+              0.28984 against small’s 0.29066. More capacity becomes useful when
+              there is enough signal to learn from.
+            </p>
+            <button class="story-jump" data-size-story="reversal">
+              Explore TabM at 5% data <span aria-hidden="true">↗</span>
+            </button>
+          </article>
+          <article>
+            <span class="finding-number">02 / THE NEAR-FLAT LAST STEP</span>
+            <h3>More than twice the parameters. Almost the same loss.</h3>
+            <p>
+              At full data, standard TabM xlarge has roughly 2.23 times as many
+              trainable parameters as large, yet its deviance is only about
+              0.0000066 lower. Both round to 0.28984. Later TabM-mini extensions
+              improve further, so this is a local plateau, not a hard limit.
+            </p>
+            <button class="story-jump" data-size-story="plateau">
+              Inspect the full-data plateau <span aria-hidden="true">↗</span>
+            </button>
+          </article>
+          <article>
+            <span class="finding-number">03 / A LARGER TRANSFORMER</span>
+            <h3>Size alone does not settle the ranking.</h3>
+            <p>
+              At full data, the vanilla Transformer’s medium model scores
+              0.29085. The large model scores 0.29094, slightly worse despite
+              roughly three times the parameters. A smooth fitted frontier does
+              not mean every larger configuration wins.
+            </p>
+            <button class="story-jump" data-size-story="transformer">
+              Compare Transformer sizes <span aria-hidden="true">↗</span>
+            </button>
+          </article>
+        </div>
+      </section>
+
+      <section
+        class="section resource-section dark"
+        id="scaling-law"
+        aria-labelledby="law-title"
+      >
+        <div class="section-marker">
+          <span>06 / TWO KINDS OF DIMINISHING RETURNS</span
+          ><span>FROM OBSERVED POINTS TO FITTED RELATIONSHIPS</span>
+        </div>
+        <div class="resource-heading">
+          <div>
+            <h2 id="law-title">
+              Double the resource.<br /><em>Shrink a smaller gap.</em>
+            </h2>
+            <p class="lead">
+              A doubling removes a fraction of the loss still left above the
+              fitted floor. Repeat it, and the same percentage acts on a smaller
+              remainder.
+            </p>
+          </div>
+          <div class="resource-equations">
+            <div>
+              <span class="resource-key key-data">D</span>
+              <p>Data scaling</p>
+              <strong>L(D) − L<sub>∞</sub> ∝ D<sup>−α</sup></strong>
+            </div>
+            <div>
+              <span class="resource-key key-parameters">P</span>
+              <p>Parameter scaling</p>
+              <strong>L(P) − L<sub>∞</sub> ∝ P<sup>−β</sup></strong>
+            </div>
+          </div>
+        </div>
+        <div class="resource-lab">
+          <div class="resource-toolbar">
+            <div>
+              <span class="figure-tag">FITTED ILLUSTRATION</span>
+              <p>Start each curve with the same 100% reducible-loss gap.</p>
+            </div>
+            <div class="control-field">
+              <label for="fit-family">Compare a model family</label
+              ><select id="fit-family">
+                <option value="tabm">TabM / TabM-mini</option>
+                <option value="transformer">Vanilla Transformer</option>
+                <option value="ffn">Feed-forward network</option>
+                <option value="multicls">MultiCLS Transformer</option>
+                <option value="hybrid">Transformer + TabM</option>
+                <option value="moe">TokenMoE</option>
+                <option value="ssl">TokenMoE + SSL</option>
+                <option value="glm">GLM</option>
+              </select>
+            </div>
+          </div>
+          <div class="resource-lab-grid">
+            <div>
+              <div class="plot-topline">
+                <span>INITIAL REDUCIBLE LOSS REMAINING</span
+                ><span>100% = STARTING GAP</span>
+              </div>
+              <svg
+                id="resource-chart"
+                viewBox="0 0 760 330"
+                role="img"
+                aria-labelledby="resource-chart-title resource-chart-description"
+              >
+                <title id="resource-chart-title">
+                  Diminishing returns to data and parameters
+                </title>
+                <desc id="resource-chart-description">
+                  Separately fitted scaling relationships show the percentage of
+                  the starting reducible-loss gap remaining as a resource
+                  increases.
+                </desc>
+              </svg>
+              <div class="resource-legend">
+                <span><i class="data-dot"></i> More training rows · D</span
+                ><span id="parameter-legend"
+                  ><i class="parameter-dot"></i> More parameters · P</span
+                >
+              </div>
+            </div>
+            <div class="resource-scores" aria-live="polite" aria-atomic="true">
+              <div class="resource-score data-score">
+                <span>Scale the data</span
+                ><strong id="data-gap-remaining">80.7<span>%</span></strong>
+                <p>of the starting gap remains</p>
+                <small id="data-exponent-label">α = 0.309</small>
+              </div>
+              <div class="resource-score parameter-score">
+                <span>Scale the parameters</span
+                ><strong id="parameter-gap-remaining"
+                  >90.3<span>%</span></strong
+                >
+                <p id="parameter-gap-description">
+                  of the starting gap remains
+                </p>
+                <small id="parameter-exponent-label">β = 0.148</small>
+              </div>
+            </div>
+          </div>
+          <div class="resource-slider">
+            <label for="doublings"
+              >Increase either resource
+              <output id="data-multiplier" for="doublings">2×</output></label
+            ><input
+              id="doublings"
+              type="range"
+              min="0"
+              max="4"
+              value="1"
+              step="1"
+            />
+            <div class="range-ticks" aria-hidden="true">
+              <span>1×</span><span>2×</span><span>4×</span><span>8×</span
+              ><span>16×</span>
+            </div>
+          </div>
+          <div class="marginal-panel">
+            <div>
+              <span class="eyebrow">WHAT EACH SUCCESSIVE DOUBLING BUYS</span>
+              <h3>A smaller absolute<br />gain each time.</h3>
+              <p>
+                These bars show the share of the <em>original</em> gap removed
+                in each step. The resources keep doubling; the increments in
+                improvement shrink. Here, pp means percentage points: one pp
+                removes one of the starting 100 gap units.
+              </p>
+            </div>
+            <div
+              id="marginal-bars"
+              class="marginal-bars"
+              role="img"
+              aria-label="Successive reductions in the initial loss gap"
+            ></div>
+          </div>
+          <p id="law-insight" class="resource-insight" aria-live="polite">
+            In the main-sweep TabM data fit, one doubling removes 19.3% of the
+            starting gap. A parameter doubling removes 9.7% under the separate
+            full-data parameter fit.
+          </p>
+          <p class="resource-caveat">
+            D uses the main-sweep family envelope, whose winning size can
+            change. P uses the full-data Pareto set: configurations that improve
+            on smaller choices. These are separate descriptive fits, not a
+            controlled comparison of two investments or a formula for changing
+            both resources at once. L<sub>∞</sub> = 0.28749 is an empirical
+            fitted floor. The 1×–16× curves illustrate the fitted equations;
+            they are not additional observations or validated extrapolations.
+          </p>
+        </div>
+        <div class="exponent-section">
+          <div>
+            <span class="eyebrow">COMPARE ALL EIGHT FAMILIES</span>
+            <h3>
+              How much of the remaining gap<br />does one doubling remove?
+            </h3>
+            <p>
+              Higher bars mean faster fitted improvement. They do not tell you
+              which family has the lowest absolute loss—the observed charts
+              answer that.
+            </p>
+          </div>
+          <div
+            class="table-scroll"
+            tabindex="0"
+            role="region"
+            aria-label="Data and parameter scaling exponents for all model families"
+          >
+            <table id="exponent-table">
+              <caption>
+                Published exponents and calculated effects of doubling
+              </caption>
+            </table>
+          </div>
+        </div>
+        <details class="resource-details">
+          <summary>
+            Why are there two TabM data exponents?
+            <span aria-hidden="true">＋</span>
+          </summary>
+          <p>
+            The main-sweep TabM data exponent is 0.309, giving about 19.3% less
+            reducible loss per doubling. Add the largest model trained only at
+            full data and the best-achieved exponent rises to 0.409, giving
+            about 24.7%. That extra point changes the fitted curve and weakens
+            its fit quality. Both figures belong to the paper; they describe
+            different selections of results.
+          </p>
+          <p>
+            The comparison above uses the matched six-fraction data sweep. The
+            parameter exponent still comes from the paper’s full-data Pareto
+            fit, including its broader capacity range.
+          </p>
+        </details>
+        <a class="text-link" href="data/scaling-exponents.csv" download
+          >Download the fitted exponents (.csv)
+          <span aria-hidden="true">↓</span></a
+        >
+      </section>
+
+      <section
+        class="section architecture-section"
+        id="architecture"
+        aria-labelledby="architecture-title"
+      >
+        <div class="section-marker">
+          <span>07 / UNDER THE HOOD</span
+          ><span>ARCHITECTURE SHAPES THE LEARNING CURVE</span>
+        </div>
+        <div class="section-heading">
+          <h2 id="architecture-title">
+            A better way<br /><em>to use the signal.</em>
+          </h2>
+          <p>
+            The study moves from familiar actuarial models to neural ensembles
+            and richer training objectives. Explore the ideas behind the
+            results.
+          </p>
+        </div>
+        <div
+          class="architecture-tabs"
+          role="tablist"
+          aria-label="Model architectures"
+        >
+          <button
+            id="tab-glm"
+            role="tab"
+            data-model="glm"
+            aria-controls="architecture-panel"
+            aria-selected="false"
+            tabindex="-1"
+          >
+            01 <span>GLM</span></button
+          ><button
+            id="tab-transformer"
+            role="tab"
+            data-model="transformer"
+            aria-controls="architecture-panel"
+            aria-selected="false"
+            tabindex="-1"
+          >
+            02 <span>Transformer</span></button
+          ><button
+            id="tab-tabm"
+            class="active"
+            role="tab"
+            data-model="tabm"
+            aria-controls="architecture-panel"
+            aria-selected="true"
+          >
+            03 <span>TabM</span></button
+          ><button
+            id="tab-ssl"
+            role="tab"
+            data-model="ssl"
+            aria-controls="architecture-panel"
+            aria-selected="false"
+            tabindex="-1"
+          >
+            04 <span>Self-supervision</span>
+          </button>
+        </div>
+        <div
+          class="architecture-panel"
+          id="architecture-panel"
+          role="tabpanel"
+          aria-labelledby="tab-tabm"
+          tabindex="0"
+        >
+          <div class="architecture-diagram">
+            <span class="mono">CONCEPTUAL ARCHITECTURE</span
+            ><svg
+              id="architecture-svg"
+              viewBox="0 0 590 310"
+              role="img"
+              aria-label="TabM: shared input is adapted into several ensemble members, then predictions are averaged."
+            ></svg
+            ><span class="diagram-footnote"
+              >Same rating factors · different ways to combine information</span
+            >
+          </div>
+          <div class="architecture-copy">
+            <span class="eyebrow" id="architecture-eyebrow"
+              >PARAMETER-EFFICIENT ENSEMBLING</span
+            >
+            <h3 id="architecture-name">
+              Many perspectives.<br />One shared backbone.
+            </h3>
+            <p id="architecture-description">
+              TabM packs several neural submodels into one network. They share
+              most of their weights, while small adapters let each member see
+              the input a little differently. Their predictions are averaged.
+            </p>
+            <div class="architecture-takeaway">
+              <span class="mono">WHAT THE EXPERIMENT FOUND</span>
+              <p id="architecture-finding">
+                This family showed the strongest data scaling and the most
+                effective use of extra capacity among the neural families
+                studied.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="cost-comparison">
+          <div>
+            <span class="eyebrow">THE RESOURCE TRADE-OFF</span>
+            <h3>Better fit has a cost.</h3>
+            <p>
+              The best full-data result also uses the most compute. These
+              representative configurations show why loss alone cannot decide
+              which model to deploy.
+            </p>
+            <p>
+              Going from TabM-mini xlarge-2 to gigantic uses 3.85 times as many
+              parameters and about four times the computation per epoch. Test
+              deviance falls by a further 0.00018. The gain continues, but the
+              resource commitment grows much faster.
+            </p>
+          </div>
+          <div>
+            <div
+              class="table-scroll"
+              tabindex="0"
+              role="region"
+              aria-label="Representative model resource comparison"
+            >
+              <table>
+                <caption>
+                  Representative full-data configurations
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Model</th>
+                    <th scope="col">Total parameters ≈</th>
+                    <th scope="col">FLOPs / epoch¹</th>
+                    <th scope="col">Deviance²</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">GLM</th>
+                    <td>≈ 600</td>
+                    <td>3.0 × 10⁹</td>
+                    <td>0.29200</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">FFN very large</th>
+                    <td>0.648M</td>
+                    <td>1.5 × 10¹³</td>
+                    <td>0.29058</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Transformer large</th>
+                    <td>0.507M</td>
+                    <td>7.6 × 10¹⁴</td>
+                    <td>0.29094</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">TokenMoE large</th>
+                    <td>1.081M</td>
+                    <td>1.7 × 10¹⁴</td>
+                    <td>0.29074</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">TokenMoE + SSL xlarge</th>
+                    <td>4.082M</td>
+                    <td>1.3 × 10¹⁵</td>
+                    <td>0.29027</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Transformer + TabM medium</th>
+                    <td>0.293M</td>
+                    <td>6.4 × 10¹⁵</td>
+                    <td>0.29056</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">TabM xlarge</th>
+                    <td>2.96M</td>
+                    <td>5.1 × 10¹⁵</td>
+                    <td>0.28984</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">TabM-mini xlarge-2</th>
+                    <td>8.246M</td>
+                    <td>5.9 × 10¹⁵</td>
+                    <td>0.28903</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">TabM-mini gigantic</th>
+                    <td>31.78M</td>
+                    <td>2.4 × 10¹⁶</td>
+                    <td>0.28885</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="cost-note">
+              ¹ One-seed per-epoch proxy, not total training cost. ² Five-seed
+              ensemble score. Source: main paper, representative configurations
+              table. Rounded parameter totals here include non-trainable
+              weights; the P explorer above uses exact trainable counts.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="section takeaway-section"
+        id="scope"
+        aria-labelledby="takeaway-title"
+      >
+        <div class="section-marker">
+          <span>08 / WHAT IT MEANS</span
+          ><span>AN EMPIRICAL GUIDE, WITH BOUNDARIES</span>
+        </div>
+        <div class="takeaway-grid">
+          <div>
+            <h2 id="takeaway-title">
+              Choose the model<br />for the <em>data you have.</em>
+            </h2>
+            <p class="lead">
+              The useful question is how well a model turns your available data
+              and compute into predictive improvement.
+            </p>
+            <div class="takeaway-statement">
+              <span aria-hidden="true">↗</span>
+              <p>
+                Start with a credible baseline.<br />Measure the learning
+                curve.<br />Scale what demonstrably works.
+              </p>
+            </div>
+          </div>
+          <div class="scope-notes">
+            <details open>
+              <summary>
+                What the evidence supports <span aria-hidden="true">−</span>
+              </summary>
+              <p>
+                Architecture-specific scaling regularities on this motor
+                frequency task. Stronger TabM scaling at large data sizes. A
+                useful connection between modern learning curves and the
+                actuarial idea of credibility.
+              </p>
+            </details>
+            <details>
+              <summary>
+                What the experiment does not establish
+                <span aria-hidden="true">＋</span>
+              </summary>
+              <p>
+                Universal model rankings, future-period performance, or a
+                guaranteed pricing or profit uplift. The study uses a single
+                anonymized portfolio and an IID split, not a temporal
+                evaluation. Gradient boosting is outside the main comparison.
+                Recipes were selected by experts without systematic
+                hyperparameter optimization; broader tuning may change the
+                rankings.
+              </p>
+            </details>
+            <details>
+              <summary>
+                How to read the winning curves
+                <span aria-hidden="true">＋</span>
+              </summary>
+              <p>
+                Each family curve selects the lowest test loss across model
+                sizes. It describes the best observed envelope, not one fixed
+                model or an unbiased estimate of a future model-selection
+                process. The largest TabM-mini and SSL variants were run only at
+                full data.
+              </p>
+            </details>
+            <details>
+              <summary>
+                How to read the self-supervision result
+                <span aria-hidden="true">＋</span>
+              </summary>
+              <p>
+                The SSL recipe improves larger Transformer-family results, but
+                its width and depth schedule also differs. This is evidence
+                about the whole recipe; it does not isolate the causal effect of
+                the auxiliary loss alone.
+              </p>
+            </details>
+            <details>
+              <summary>
+                How to read the compute results
+                <span aria-hidden="true">＋</span>
+              </summary>
+              <p>
+                The table reports one-seed FLOPs per epoch. An equivalent
+                five-seed ensemble proxy multiplies that cost by five. Neither
+                measures total training cost: early stopping changes the number
+                of epochs, so an exact total-compute optimum is not established.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="section research-section dark"
+        id="research"
+        aria-labelledby="research-title"
+      >
+        <div class="section-marker">
+          <span>09 / KEEP EXPLORING</span
+          ><span>THE RESEARCH, OPEN TO INSPECTION</span>
+        </div>
+        <div class="research-heading">
+          <div>
+            <h2 id="research-title">Go beyond<br /><em>the curve.</em></h2>
+            <p>
+              Read the full argument, examine the methodology,<br />or explore
+              the public-data companion.
+            </p>
+          </div>
+          <a
+            class="paper-cover"
+            href="research/scaling-laws-paper.pdf"
+            target="_blank"
+            rel="noopener"
+            aria-label="Open the research paper PDF in a new tab"
+            ><span class="mono">RESEARCH PAPER / MAY 2026</span
+            ><strong
+              >Scaling Laws,<br />Tabular Data<br />and Actuarial<br /><em
+                >Ratemaking<br />Models</em
+              ></strong
+            ><span>Ronald Richman <span aria-hidden="true">↗</span></span
+            ><svg viewBox="0 0 260 75" aria-hidden="true">
+              <path
+                d="M0 0C55 0 30 72 260 72M0 15C65 15 50 62 260 62M0 30C80 30 60 52 260 52"
+              /></svg
+          ></a>
+        </div>
+        <div class="research-links">
+          <a
+            href="research/scaling-laws-paper.pdf"
+            target="_blank"
+            rel="noopener"
+            ><span class="resource-index">01</span>
+            <div>
+              <h3>The full paper</h3>
+              <p>Methodology, architecture, results, and mathematical detail</p>
+            </div>
+            <span class="resource-type"
+              >PDF <span aria-hidden="true">↗</span></span
+            ></a
+          ><a
+            href="research/practitioner-guide.pdf"
+            target="_blank"
+            rel="noopener"
+            ><span class="resource-index">02</span>
+            <div>
+              <h3>The practitioner’s guide</h3>
+              <p>A practical reading for actuarial model selection</p>
+            </div>
+            <span class="resource-type"
+              >PDF <span aria-hidden="true">↗</span></span
+            ></a
+          ><a
+            href="research/public-data-supplement.pdf"
+            target="_blank"
+            rel="noopener"
+            ><span class="resource-index">03</span>
+            <div>
+              <h3>The public-data companion</h3>
+              <p>A simpler, reproducible workflow on French MTPL data</p>
+            </div>
+            <span class="resource-type"
+              >PDF <span aria-hidden="true">↗</span></span
+            ></a
+          ><a
+            href="https://github.com/RonRichman/frmtpl-scaling-laws"
+            target="_blank"
+            rel="noopener"
+            ><span class="resource-index">04</span>
+            <div>
+              <h3>Explore the implementation</h3>
+              <p>Open-source companion code and reproduction workflow</p>
+            </div>
+            <span class="resource-type"
+              >GITHUB <span aria-hidden="true">↗</span></span
+            ></a
+          >
+        </div>
+        <p class="research-boundary">
+          The public French MTPL companion is a separate experiment. The
+          interactive results above come from the main anonymized motor
+          portfolio.
+        </p>
+        <section
+          class="research-acknowledgements"
+          id="acknowledgements"
+          aria-labelledby="acknowledgements-title"
+        >
+          <div>
+            <p class="eyebrow">RESEARCH SUPPORT &amp; REVIEW</p>
+            <h3 id="acknowledgements-title">With thanks.</h3>
+          </div>
+          <div class="acknowledgements-copy">
+            <p>
+              The <strong>Casualty Actuarial Society (CAS)</strong> funded this
+              research.
+            </p>
+            <p>
+              We thank <strong>Morgan Bugbee and the CAS project group</strong>
+              for their guidance and insights, and the
+              <strong>anonymous reviewers</strong> for comments that
+              substantially improved the manuscript.
+            </p>
+            <p>
+              We also thank the contributing insurer for providing the
+              anonymized motor portfolio extract used in this study.
+            </p>
+          </div>
+        </section>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <a class="wordmark" href="#top"
+        ><span>SCALING<span class="wordmark-light"> LAWS</span></span></a
+      >
+      <p>
+        Research by Ronald Richman<br /><span
+          >Scaling Laws, Tabular Data and Actuarial Ratemaking Models · May
+          2026</span
+        >
+      </p>
+      <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </footer>
+    <noscript
+      ><div class="noscript-note">
+        Interactive charts require JavaScript. You can still read the guide and
+        <a href="data/scaling-results.csv">download the results</a> or
+        <a href="research/scaling-laws-paper.pdf">read the full paper</a>.
+      </div></noscript
+    >
+  </body>
+</html>

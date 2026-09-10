@@ -1,0 +1,11 @@
+verification/
+*.zip
+node_modules/
+__pycache__/
+.DS_Store
+
+# Local research provenance and personal notes
+FOR_RON.md
+RESEARCH_PROVENANCE.md
+VERIFICATION.md
+scripts/build_research_data.py

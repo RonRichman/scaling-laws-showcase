@@ -1,0 +1,9 @@
+family_id,data_exponent_main_sweep,parameter_exponent_full_data_pareto,data_doubling_gap_removed_proportion,parameter_doubling_gap_removed_proportion,fitted_loss_floor,data_exponent_low_fractions,data_exponent_high_fractions,data_exponent_leave_one_fraction_out_min,data_exponent_leave_one_fraction_out_max,parameter_embedding_exponent,parameter_backbone_exponent,data_source_table,parameter_source_table
+glm,0.091,,0.06112825268454791,,0.28749,0.122,0.041,0.075,0.098,,,tab:alpha-robustness,
+ffn,0.246,0.028,0.15676888974988756,0.019220996011448666,0.28749,0.295,0.253,0.217,0.256,0.063,0.026,tab:alpha-robustness,tab:beta_param_split
+transformer,0.194,0.025,0.1258213795896268,0.017179401454748944,0.28749,0.218,0.153,0.189,0.199,0.06,0.02,tab:alpha-robustness,tab:beta_param_split
+multicls,0.182,0.037,0.11851984209282995,0.025320369108451146,0.28749,0.192,0.178,0.171,0.187,0.089,0.029,tab:alpha-robustness,tab:beta_param_split
+hybrid,0.183,0.044,0.11913062587302081,0.030038089658265155,0.28749,0.182,0.229,0.18,0.186,0.102,0.04,tab:alpha-robustness,tab:beta_param_split
+moe,0.202,0.008,0.1306554399099784,0.005529831326785639,0.28749,0.198,0.215,0.2,0.205,0.008,0.007,tab:alpha-robustness,tab:beta_param_split
+ssl,0.22,0.055,0.14143456356224626,0.03740555689824865,0.28749,0.179,0.398,0.197,0.238,0.053,0.058,tab:alpha-robustness,tab:beta_param_split
+tabm,0.309,0.148,0.19279892549523514,0.09749927253756996,0.28749,0.259,0.601,0.283,0.323,0.249,0.146,tab:alpha-robustness,tab:beta_param_split
